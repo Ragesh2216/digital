@@ -14,7 +14,7 @@ import Service from "./pages/Service.jsx";
 import Subscription from "./pages/Subscription.jsx";
 import ArchiveDop from "./components/ArchiveDop.jsx";
 import  Login from "./pages/Login.jsx";
-import BlogDetails from "./components/BlogDetails.jsx";
+import Latest from "./pages/Latest.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import ExploreServices from "./components/ExploreServices.jsx";
 import InventoryOptimization from "./components/InventoryOptimization.jsx";
@@ -56,8 +56,8 @@ const router = createBrowserRouter([
     element: <App element={<Dashboard />} />,
   },
   {
-    path: "/blogdetails",
-    element: <App element={<BlogDetails />} />,
+    path: "/latest",
+    element: <App element={<Latest/>} />,
   },
   {
     path: "/subscription",

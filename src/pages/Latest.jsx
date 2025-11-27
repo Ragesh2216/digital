@@ -19,7 +19,7 @@ function Latest() {
 
     try {
       await new Promise(resolve => setTimeout(resolve, 1500));
-      setMessage({ type: 'success', text: 'Thank you! Our team will contact you shortly.' });
+      setMessage({ type: 'success', text: 'Thank you! Our marketing team will contact you shortly.' });
       setEmail('');
     } catch (error) {
       setMessage({ type: 'error', text: 'Submission failed. Please try again.' });
@@ -32,20 +32,20 @@ function Latest() {
     {
       id: 1,
       name: "Starter",
-      description: "Perfect for small businesses starting their SCM journey",
-      price: { monthly: 299, yearly: 2990 },
+      description: "Perfect for small businesses starting their digital marketing journey",
+      price: { monthly: 499, yearly: 4990 },
       popular: false,
       color: "from-blue-500 to-cyan-500",
-      icon: "🚚",
+      icon: "📱",
       features: [
-        "Basic Inventory Management",
-        "Real-time Tracking (Up to 100 shipments/month)",
-        "Basic Analytics Dashboard",
-        "Email Support",
-        "2 User Accounts",
-        "Mobile App Access",
-        "API Access (Limited)",
-        "Basic Reporting"
+        "Social Media Management (2 platforms)",
+        "Basic SEO Optimization",
+        "Google Analytics Setup",
+        "Email Marketing (Up to 1,000 contacts)",
+        "Monthly Performance Report",
+        "2 Campaigns/Month",
+        "Basic Content Creation",
+        "Ad Spend Management"
       ],
       cta: "Start Free Trial",
       link: "/signup"
@@ -53,22 +53,22 @@ function Latest() {
     {
       id: 2,
       name: "Professional",
-      description: "Advanced features for growing supply chains",
-      price: { monthly: 799, yearly: 7990 },
+      description: "Comprehensive marketing for growing businesses",
+      price: { monthly: 1299, yearly: 12990 },
       popular: true,
       color: "from-purple-500 to-pink-500",
-      icon: "📊",
+      icon: "🚀",
       features: [
-        "Advanced Inventory Optimization",
-        "Unlimited Real-time Tracking",
-        "AI-Powered Demand Forecasting",
-        "Priority Support",
-        "10 User Accounts",
-        "Advanced Analytics",
-        "Full API Access",
-        "Custom Reporting",
-        "Supplier Management",
-        "Warehouse Management"
+        "Social Media Management (5 platforms)",
+        "Advanced SEO Strategy",
+        "PPC Campaign Management",
+        "Email Marketing (Up to 10,000 contacts)",
+        "Weekly Performance Reports",
+        "10 Campaigns/Month",
+        "Content Strategy & Creation",
+        "Competitor Analysis",
+        "Conversion Rate Optimization",
+        "Marketing Automation"
       ],
       cta: "Get Started",
       link: "/signup"
@@ -76,24 +76,24 @@ function Latest() {
     {
       id: 3,
       name: "Enterprise",
-      description: "Complete SCM solution for large organizations",
-      price: { monthly: 1499, yearly: 14990 },
+      description: "Full-service marketing for established brands",
+      price: { monthly: 2999, yearly: 29990 },
       popular: false,
       color: "from-orange-500 to-amber-500",
-      icon: "🏭",
+      icon: "🏢",
       features: [
         "Everything in Professional",
-        "Dedicated Account Manager",
-        "Custom AI Models",
-        "24/7 Phone Support",
-        "Unlimited User Accounts",
-        "Multi-warehouse Management",
-        "Advanced Risk Analytics",
-        "Custom Integrations",
-        "SLA Guarantee",
-        "On-premise Deployment Option",
-        "Training & Onboarding",
-        "Custom Development"
+        "Dedicated Marketing Manager",
+        "Multi-channel Strategy",
+        "Unlimited Email Marketing",
+        "Advanced Analytics Dashboard",
+        "Unlimited Campaigns",
+        "Video Marketing",
+        "Influencer Partnership Management",
+        "Marketing Funnel Optimization",
+        "Custom Reporting",
+        "24/7 Strategy Support",
+        "Brand Development"
       ],
       cta: "Contact Sales",
       link: "/contact"
@@ -102,63 +102,63 @@ function Latest() {
 
   const featuresComparison = [
     {
-      feature: "Real-time Shipment Tracking",
-      starter: "✓ (100/month)",
-      professional: "✓ Unlimited",
-      enterprise: "✓ Unlimited"
+      feature: "Social Media Platforms",
+      starter: "2 Platforms",
+      professional: "5 Platforms",
+      enterprise: "Unlimited"
     },
     {
-      feature: "Inventory Management",
-      starter: "Basic",
-      professional: "Advanced",
-      enterprise: "Advanced + AI"
+      feature: "Email Marketing Contacts",
+      starter: "1,000",
+      professional: "10,000",
+      enterprise: "Unlimited"
     },
     {
-      feature: "AI Demand Forecasting",
-      starter: "✗",
-      professional: "✓",
-      enterprise: "✓ Custom Models"
-    },
-    {
-      feature: "User Accounts",
+      feature: "Monthly Campaigns",
       starter: "2",
       professional: "10",
       enterprise: "Unlimited"
     },
     {
-      feature: "API Access",
-      starter: "Limited",
-      professional: "Full",
-      enterprise: "Full + Custom"
-    },
-    {
-      feature: "Support",
-      starter: "Email",
-      professional: "Priority",
-      enterprise: "24/7 Dedicated"
-    },
-    {
-      feature: "Analytics Dashboard",
-      starter: "Basic",
-      professional: "Advanced",
-      enterprise: "Enterprise"
-    },
-    {
-      feature: "Warehouse Management",
+      feature: "PPC Management",
       starter: "✗",
-      professional: "✓ Single",
-      enterprise: "✓ Multi-location"
-    },
-    {
-      feature: "Supplier Network",
-      starter: "✗",
-      professional: "✓ Basic",
+      professional: "✓",
       enterprise: "✓ Advanced"
     },
     {
-      feature: "Custom Integrations",
+      feature: "Marketing Automation",
+      starter: "✗",
+      professional: "✓",
+      enterprise: "✓ Advanced"
+    },
+    {
+      feature: "Dedicated Manager",
+      starter: "✗",
+      professional: "✗",
+      enterprise: "✓"
+    },
+    {
+      feature: "Reporting Frequency",
+      starter: "Monthly",
+      professional: "Weekly",
+      enterprise: "Real-time"
+    },
+    {
+      feature: "Video Marketing",
       starter: "✗",
       professional: "Limited",
+      enterprise: "✓ Full"
+    },
+    {
+      feature: "Influencer Marketing",
+      starter: "✗",
+      professional: "✗",
+      enterprise: "✓"
+    },
+    {
+      feature: "Custom Strategy",
+      starter: "✗",
+      professional: "Basic",
       enterprise: "✓ Full"
     }
   ];
@@ -169,7 +169,7 @@ function Latest() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900 py-6 min-[320px]:py-8 px-3 min-[320px]:px-4 sm:px-6 lg:px-8 relative overflow-hidden pt-16">
-      {/* Animated Background Elements - Reduced for Mobile */}
+      {/* Animated Background Elements */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         {[...Array(8)].map((_, i) => (
           <div
@@ -191,17 +191,17 @@ function Latest() {
         ))}
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Header Section - Mobile Optimized */}
+      <div className="max-w-7xl mx-auto mt-12 relative z-10">
+        {/* Header Section */}
         <div className={`text-center mt-4 min-[320px]:mt-6 mb-8 min-[320px]:mb-12 lg:mb-16 transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h1 className="text-2xl min-[320px]:text-2xl min-[375px]:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 min-[320px]:mb-5 lg:mb-6 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent leading-tight px-2">
-            Supply Chain Management Plans
+            Digital Marketing Plans
           </h1>
           <p className="text-sm min-[320px]:text-base sm:text-lg lg:text-xl text-gray-300 max-w-xs min-[320px]:max-w-sm sm:max-w-md lg:max-w-3xl mx-auto mb-8 min-[320px]:mb-10 lg:mb-12 leading-relaxed px-2">
-            Choose the perfect plan to optimize your supply chain operations, reduce costs, and improve efficiency with AI-powered solutions.
+            Drive growth, increase visibility, and maximize ROI with our data-driven digital marketing solutions tailored to your business goals.
           </p>
 
-          {/* Billing Toggle - Mobile Optimized */}
+          {/* Billing Toggle */}
           <div className="flex justify-center items-center mb-8 min-[320px]:mb-10 lg:mb-16 px-2">
             <div className="inline-flex items-center bg-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl p-1 min-[320px]:p-1.5 border border-white/20">
               <button
@@ -221,18 +221,17 @@ function Latest() {
                   }`}
               >
                 Yearly
-
               </button>
             </div>
           </div>
 
-          {/* Stats - Mobile Optimized */}
+          {/* Stats */}
           <div className="grid grid-cols-2 min-[320px]:grid-cols-2 md:grid-cols-4 gap-4 min-[320px]:gap-5 sm:gap-6 lg:gap-8 max-w-xs min-[320px]:max-w-sm sm:max-w-md lg:max-w-2xl mx-auto mb-4">
             {[
-              { number: "99.5%", label: "Uptime SLA", color: "from-green-500 to-emerald-500" },
-              { number: "24/7", label: "Support", color: "from-blue-500 to-cyan-500" },
-              { number: "50K+", label: "Shipments", color: "from-purple-500 to-pink-500" },
-              { number: "40%", label: "Cost Reduction", color: "from-orange-500 to-amber-500" }
+              { number: "3-5x", label: "ROI Average", color: "from-green-500 to-emerald-500" },
+              { number: "24/7", label: "Campaign Monitoring", color: "from-blue-500 to-cyan-500" },
+              { number: "50%+", label: "Cost Per Lead Reduction", color: "from-purple-500 to-pink-500" },
+              { number: "2.5x", label: "Conversion Rate Increase", color: "from-orange-500 to-amber-500" }
             ].map((stat, index) => (
               <div
                 key={index}
@@ -249,7 +248,7 @@ function Latest() {
           </div>
         </div>
 
-        {/* Pricing Cards - Mobile Optimized */}
+        {/* Pricing Cards */}
         <div className="grid grid-cols-1 min-[320px]:grid-cols-1 md:grid-cols-3 gap-4 min-[320px]:gap-5 sm:gap-6 lg:gap-8 mb-12 min-[320px]:mb-16 lg:mb-20 items-stretch">
           {pricingPlans.map((plan, index) => (
             <div
@@ -265,7 +264,7 @@ function Latest() {
               {/* Popular Badge */}
               {plan.popular && (
                 <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20">
-
+                  
                 </div>
               )}
 
@@ -295,7 +294,11 @@ function Latest() {
                       /{activeTab === "monthly" ? "month" : "year"}
                     </span>
                   </div>
-
+                  {activeTab === "yearly" && (
+                    <p className="text-green-400 text-sm mt-2 font-medium">
+                      Save ${(plan.price.monthly * 12 - plan.price.yearly)} annually
+                    </p>
+                  )}
                 </div>
 
                 {/* Features */}
@@ -331,8 +334,7 @@ function Latest() {
           ))}
         </div>
 
-
-        {/* Custom Enterprise Solution - Mobile Optimized */}
+        {/* Custom Enterprise Solution */}
         <div className={`relative overflow-hidden rounded-xl sm:rounded-2xl p-4 min-[320px]:p-5 sm:p-6 lg:p-8 md:p-12 text-center text-white mb-8 min-[320px]:mb-12 lg:mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="absolute inset-0 bg-gradient-to-r from-cyan-600/30 via-blue-600/30 to-purple-600/30"></div>
 
@@ -355,10 +357,10 @@ function Latest() {
 
           <div className="relative z-10 max-w-4xl mx-auto">
             <h2 className="text-2xl min-[375px]:text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 min-[375px]:mb-4 lg:mb-6 leading-tight">
-              Need a Custom Solution?
+              Need Custom Marketing Solutions?
             </h2>
             <p className="text-cyan-100 text-base min-[375px]:text-base lg:text-lg mb-5 min-[375px]:mb-5 lg:mb-8 max-w-xs min-[375px]:max-w-sm sm:max-w-md lg:max-w-2xl mx-auto leading-relaxed">
-              Our enterprise team can build a tailored SCM solution for your specific business needs with custom integrations and dedicated support.
+              Our expert marketing team can create a tailored strategy with custom campaigns, advanced analytics, and dedicated support to achieve your specific business objectives.
             </p>
             <form onSubmit={handleContactSubmit} className="flex flex-col gap-3 min-[375px]:gap-3 sm:gap-4 max-w-xs min-[375px]:max-w-sm sm:max-w-md mx-auto">
               <input
@@ -383,7 +385,7 @@ function Latest() {
                 ) : (
                   <>
                     <span className="block min-[375px]:inline">Contact</span>
-                    <span className="hidden min-[375px]:inline">&nbsp;Enterprise Team</span>
+                    <span className="hidden min-[375px]:inline">&nbsp;Marketing Team</span>
                   </>
                 )}
               </button>
@@ -397,63 +399,8 @@ function Latest() {
           </div>
         </div>
 
-        {/* FAQ Section - Mobile Optimized */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 min-[320px]:gap-8 lg:gap-12 mb-8 min-[320px]:mb-12 lg:mb-16">
-          <div>
-            <h3 className="text-lg min-[320px]:text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-4 min-[320px]:mb-5 lg:mb-8 text-center lg:text-left leading-tight">Frequently Asked Questions</h3>
-            <div className="space-y-4 min-[320px]:space-y-5 sm:space-y-6">
-              {[
-                {
-                  question: "Can I switch plans later?",
-                  answer: "Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately."
-                },
-                {
-                  question: "Is there a free trial?",
-                  answer: "Yes, all plans include a 14-day free trial with full access to all features."
-                },
-                {
-                  question: "Do you offer discounts for non-profits?",
-                  answer: "Yes, we offer special pricing for non-profit organizations and educational institutions."
-                }
-              ].map((faq, index) => (
-                <div key={index} className="bg-white/5 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 min-[320px]:p-5 sm:p-6 border border-white/10 hover:border-cyan-500/30 transition-all duration-300">
-                  <h4 className="font-semibold text-white text-base min-[320px]:text-lg mb-2 min-[320px]:mb-3 leading-tight">{faq.question}</h4>
-                  <p className="text-gray-300 text-sm min-[320px]:text-base leading-relaxed">{faq.answer}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h3 className="text-lg min-[320px]:text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-4 min-[320px]:mb-5 lg:mb-8 text-center lg:text-left leading-tight">Why Choose Our SCM Platform?</h3>
-            <div className="space-y-4 min-[320px]:space-y-5 sm:space-y-6">
-              {[
-                {
-                  icon: "🚀",
-                  title: "AI-Powered Optimization",
-                  description: "Reduce costs by up to 40% with intelligent route and inventory optimization"
-                },
-                {
-                  icon: "🔒",
-                  title: "Enterprise Security",
-                  description: "Bank-level security with 99.9% uptime SLA and data encryption"
-                },
-                {
-                  icon: "🌐",
-                  title: "Global Support",
-                  description: "24/7 support with dedicated account managers for enterprise clients"
-                }
-              ].map((feature, index) => (
-                <div key={index} className="flex items-start space-x-3 min-[320px]:space-x-4 sm:space-x-6 bg-white/5 backdrop-blur-sm rounded-lg sm:rounded-xl p-4 min-[320px]:p-5 sm:p-6 border border-white/10 hover:border-cyan-500/30 transition-all duration-300">
-                  <div className="text-2xl min-[320px]:text-3xl flex-shrink-0">{feature.icon}</div>
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-semibold text-white text-base min-[320px]:text-lg mb-1 min-[320px]:mb-2 leading-tight">{feature.title}</h4>
-                    <p className="text-gray-300 text-sm min-[320px]:text-base leading-relaxed">{feature.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        
+        
       </div>
 
       <style jsx>{`

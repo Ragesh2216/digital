@@ -36,8 +36,8 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className="bg-gradient-to-r from-[#0091e6] to-[#0091e6] fixed top-0 left-0 w-full shadow-md z-[999]">
-      <nav
+   <header className="bg-gradient-to-r from-[#0091e6] to-[#0091e6] fixed top-0 left-0 w-full shadow-md z-[999]">
+       <nav
         ref={navRef}
         className="flex justify-between items-center px-4 sm:px-6 py-3 max-w-7xl mx-auto relative"
       >
@@ -93,7 +93,7 @@ const Navbar = () => {
             ${isOpen ? "flex" : "hidden"} 
             lg:flex
             flex-col lg:flex-row
-            gap-4 lg:gap-6
+            gap-0 lg:gap-6
             items-center
             text-base font-medium text-slate-800
             absolute lg:static
@@ -101,15 +101,15 @@ const Navbar = () => {
             bg-white lg:bg-transparent
             border border-gray-200 lg:border-none
             shadow-xl lg:shadow-none
-            py-4 lg:py-0
+            py-0 lg:py-0
             rounded-lg lg:rounded-none
             z-40
             transition-all duration-300 ease-in-out
           `}
         >
           {/* Home Dropdown - Always visible */}
-          <li className="relative w-full lg:w-auto">
-            <div className="flex items-center justify-center lg:justify-start lg:mr-2 lg:translate-x-4">
+          <li className="relative w-full lg:w-auto border-b border-gray-200 lg:border-none">
+            <div className="flex items-center justify-center lg:justify-start lg:mr-2 lg:translate-x-4 px-4 py-3 lg:py-0 w-full">
               <Link 
                 to="/"
                 onClick={() => {
@@ -124,7 +124,7 @@ const Navbar = () => {
               {/* Always show dropdown toggle button */}
               <button
                 onClick={toggleHomeDropdown}
-                className="p-2 hover:bg-gray-100 lg:hover:bg-white/20 rounded-lg transition-colors duration-200"
+                className="p-2 hover:bg-gray-100 lg:hover:bg-white/20 rounded-lg transition-colors duration-200 absolute right-4 lg:relative lg:right-0"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -154,11 +154,11 @@ const Navbar = () => {
                 w-full lg:w-48
                 bg-white
                 border border-gray-200
-                rounded-lg
+                rounded-lg lg:rounded-lg
                 shadow-lg
                 py-2
                 z-50
-                mt-1
+                mt-0 lg:mt-1
               `}
             >
               <Link
@@ -175,68 +175,79 @@ const Navbar = () => {
           </li>
 
           {/* Only show other navigation items if NOT on homepage2 */}
-          {!isHomePage2 && (
+          {!isHomePage2 ? (
             <>
-              <li className="w-full lg:w-auto">
+              <li className="w-full lg:w-auto border-b border-gray-200 lg:border-none">
                 <Link
                   to="/dashboards"
                   onClick={closeMenu}
-                  className="block text-center lg:text-left py-2 px-4 rounded-lg hover:bg-gray-100 lg:hover:bg-white/20 hover:text-purple-700 w-full"
+                  className="block text-center py-3 px-4 rounded-lg hover:bg-gray-100 lg:hover:bg-white/20 hover:text-purple-700 w-full"
                 >
                   Dashboard
                 </Link>
               </li>
 
-              <li className="w-full lg:w-auto">
+              <li className="w-full lg:w-auto border-b border-gray-200 lg:border-none">
                 <Link
                   to="/subscription"
                   onClick={closeMenu}
-                  className="block text-center lg:text-left py-2 px-4 rounded-lg hover:bg-gray-100 lg:hover:bg-white/20 hover:text-purple-700 w-full"
+                  className="block text-center py-3 px-4 rounded-lg hover:bg-gray-100 lg:hover:bg-white/20 hover:text-purple-700 w-full"
                 >
-                  Pricing
+                  Subscription
                 </Link>
               </li>
 
-              <li className="w-full lg:w-auto">
+              <li className="w-full lg:w-auto border-b border-gray-200 lg:border-none">
                 <Link
                   to="/about"
                   onClick={closeMenu}
-                  className="block text-center lg:text-left py-2 px-4 rounded-lg hover:bg-gray-100 lg:hover:bg-white/20 hover:text-purple-700 w-full"
+                  className="block text-center py-3 px-4 rounded-lg hover:bg-gray-100 lg:hover:bg-white/20 hover:text-purple-700 w-full"
                 >
                   About us
                 </Link>
               </li>
 
-              <li className="w-full lg:w-auto">
+              <li className="w-full lg:w-auto border-b border-gray-200 lg:border-none">
                 <Link
                   to="/services"
                   onClick={closeMenu}
-                  className="block text-center lg:text-left py-2 px-4 rounded-lg hover:bg-gray-100 lg:hover:bg-white/20 hover:text-purple-700 w-full"
+                  className="block text-center py-3 px-4 rounded-lg hover:bg-gray-100 lg:hover:bg-white/20 hover:text-purple-700 w-full"
                 >
                   Services
                 </Link>
               </li>
 
-              <li className="w-full lg:w-auto">
+              <li className="w-full lg:w-auto border-b border-gray-200 lg:border-none">
                 <Link
                   to="/contact"
                   onClick={closeMenu}
-                  className="block text-center lg:text-left py-2 px-4 rounded-lg hover:bg-gray-100 lg:hover:bg-white/20 hover:text-purple-700 w-full"
+                  className="block text-center py-3 px-4 rounded-lg hover:bg-gray-100 lg:hover:bg-white/20 hover:text-purple-700 w-full"
                 >
                   Contact
                 </Link>
               </li>
 
-              <li className="w-full lg:w-auto">
+              <li className="w-full lg:w-auto border-b border-gray-200 lg:border-none">
                 <Link
                   to="/login"
                   onClick={closeMenu}
-                  className="block text-center lg:text-left bg-white text-purple-700 hover:bg-gray-100 hover:text-purple-800 transition-colors duration-200 py-2 px-6 rounded-lg font-semibold w-full lg:w-auto"
+                  className="block text-center bg-white text-purple-700 hover:bg-gray-100 hover:text-purple-800 transition-colors duration-200 py-3 px-6 rounded-lg font-semibold w-full lg:w-auto"
                 >
                   Login
                 </Link>
               </li>
             </>
+          ) : (
+            // Show only the Latest link when on homepage2
+            <li className="w-full lg:w-auto border-b border-gray-200 lg:border-none">
+              <Link
+                to="/latest"
+                onClick={closeMenu}
+                className="block text-center py-3 px-4 rounded-lg hover:bg-gray-100 lg:hover:bg-white/20 hover:text-purple-700 w-full"
+              >
+                Pricing
+              </Link>
+            </li>
           )}
         </ul>
       </nav>
