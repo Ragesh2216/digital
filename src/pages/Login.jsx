@@ -101,7 +101,7 @@ export default function Login() {
       <div className="w-full max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Side - Marketing Hero */}
-          <div className={`text-center mt-8  lg:text-left transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+          <div className={`text-center mt-16  lg:text-left transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             <div className="mb-12">
               
               
@@ -192,7 +192,7 @@ export default function Login() {
           {/* Right Side - Auth Form */}
           <div className={`bg-white/10 backdrop-blur-xl mt-16 rounded-3xl shadow-2xl p-8 lg:p-12 border border-white/20 transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
             {/* Form Header */}
-            <div className="text-center mt-8 mb-8">
+            <div className="text-center mt-16 mb-8">
               <div className="w-24 h-24 bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl transform hover:scale-105 transition-transform duration-300">
                 <span className="text-3xl text-white">
                   {isLogin ? "🚀" : "🌟"}

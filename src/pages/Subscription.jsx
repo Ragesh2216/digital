@@ -292,7 +292,7 @@ const SubscriptionView = ({ handleSubscription }) => (
     <div className="max-w-7xl mx-auto pt-10 pb-20">
         
         {/* Modern Header Section */}
-        <div className="text-center mb-16 animate-fade-in-up">
+        <div className="text-center mt-8 mb-16 animate-fade-in-up">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 tracking-tight bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
             Digital Marketing Plans
           </h1>

@@ -66,8 +66,6 @@ const Dashboard = () => {
     'from-blue-500 via-cyan-500 to-green-500',
     'from-green-500 via-emerald-500 to-teal-500',
     'from-orange-500 via-amber-500 to-yellow-500',
-    'from-indigo-500 via-purple-500 to-pink-500',
-    'from-teal-500 via-cyan-500 to-blue-500'
   ];
 
   // Performance Data with vibrant colors
@@ -193,13 +191,13 @@ const Dashboard = () => {
       {/* Animated Background Elements */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         {/* Floating Gradient Orbs */}
-        {[...Array(8)].map((_, i) => (
+        {[...Array(6)].map((_, i) => (
           <div
             key={i}
             className="absolute rounded-full animate-float-slow opacity-20"
             style={{
-              width: `${Math.random() * 80 + 40}px`,
-              height: `${Math.random() * 80 + 40}px`,
+              width: `${Math.random() * 60 + 30}px`,
+              height: `${Math.random() * 60 + 30}px`,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               background: `linear-gradient(45deg, ${
@@ -209,22 +207,7 @@ const Dashboard = () => {
               })`,
               animationDelay: `${i * 2}s`,
               animationDuration: `${15 + i * 3}s`,
-              filter: 'blur(20px)'
-            }}
-          />
-        ))}
-        
-        {/* Animated Particles */}
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 animate-pulse-slow rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              backgroundColor: ['#8B5CF6', '#EC4899', '#3B82F6', '#10B981', '#F59E0B'][i % 5],
-              animationDelay: `${i * 0.5}s`,
-              animationDuration: '3s'
+              filter: 'blur(15px)'
             }}
           />
         ))}
@@ -233,49 +216,49 @@ const Dashboard = () => {
       {/* Header */}
       <div className="relative z-10">
         <div className="bg-black/20 backdrop-blur-lg border-b border-white/10">
-          <div className="max-w-7xl mx-auto px-3 py-4">
+          <div className="max-w-7xl mt-16 mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-xl mt-16 font-bold bg-gradient-to-r from-purple-300 to-pink-400 bg-clip-text text-transparent">
+                <h1 className="text-2xl font-bold bg-gradient-to-r mt-4 from-purple-300 to-pink-400 bg-clip-text text-transparent">
                   Analytics Pro
                 </h1>
-                <p className="text-purple-200 text-xs mt-1">Real-time Marketing Dashboard</p>
+                <p className="text-purple-200 text-sm mt-1">Real-time Marketing Dashboard</p>
               </div>
-              
+              <div className="text-white text-sm">
+                Live
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse inline-block ml-2"></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-3 py-4">
-        {/* Quick Stats Grid */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 py-4 pb-20">
+        {/* Quick Stats Grid - Improved mobile layout */}
         <div className="grid grid-cols-2 gap-3 mb-6">
           {quickStats.map((stat, index) => (
             <div 
               key={index}
-              className="relative overflow-hidden rounded-2xl p-4 border border-white/20 backdrop-blur-sm animate-fade-in-up group"
+              className="relative overflow-hidden rounded-xl p-3 border border-white/20 backdrop-blur-sm animate-fade-in-up group"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Animated Gradient Background */}
               <div className={`absolute inset-0 bg-gradient-to-br ${stat.gradient} opacity-80 group-hover:opacity-100 transition-all duration-500`}></div>
               
-              {/* Shimmer Effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-              
               <div className="relative z-10">
                 <div className="flex items-start justify-between">
-                  <div>
+                  <div className="flex-1 min-w-0">
                     <div className="flex items-center space-x-2 mb-2">
-                      <span className="text-lg animate-bounce">{stat.icon}</span>
-                      <p className="text-white/90 text-xs font-medium">{stat.title}</p>
+                      <span className="text-base animate-bounce">{stat.icon}</span>
+                      <p className="text-white/90 text-xs font-medium truncate">{stat.title}</p>
                     </div>
-                    <p className="text-xl font-bold text-white mb-1">
+                    <p className="text-lg font-bold text-white mb-1 truncate">
                       <AnimatedNumber value={stat.value} duration={2000} />
                     </p>
-                    <p className="text-white/70 text-xs">{stat.description}</p>
+                    <p className="text-white/70 text-xs truncate">{stat.description}</p>
                   </div>
-                  <div className={`flex items-center space-x-1 px-2 py-1 rounded-full ${
+                  <div className={`flex items-center space-x-1 px-2 py-1 rounded-full flex-shrink-0 ml-2 ${
                     stat.trend === 'up' ? 'bg-green-500/30' : 'bg-red-500/30'
                   }`}>
                     <span className="text-white text-xs">{stat.change}</span>
@@ -288,12 +271,12 @@ const Dashboard = () => {
         </div>
 
         {/* Main Revenue Chart */}
-        <div className="bg-black/20 backdrop-blur-lg rounded-2xl p-4 border border-white/20 mb-6 animate-fade-in-up">
+        <div className="bg-black/20 backdrop-blur-lg rounded-xl p-4 border border-white/20 mb-6 animate-fade-in-up">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-white font-semibold text-sm">Revenue Analytics</h2>
-            
+            <h2 className="text-white font-semibold text-base">Revenue Analytics</h2>
+            <div className="text-white/70 text-xs">Last 6 months</div>
           </div>
-          <div className="h-64">
+          <div className="h-48">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={performanceData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -309,14 +292,15 @@ const Dashboard = () => {
                   stroke="rgba(255,255,255,0.7)"
                   axisLine={false}
                   tickLine={false}
+                  width={40}
                 />
                 <Tooltip 
                   contentStyle={{ 
-                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    backgroundColor: 'rgba(255, 255, 255, 0.9)',
                     backdropFilter: 'blur(10px)',
                     border: '1px solid rgba(255,255,255,0.2)',
                     borderRadius: '10px',
-                    color: 'white',
+                    color: 'black',
                     fontSize: '12px'
                   }}
                   formatter={(value) => [`$${value.toLocaleString()}`, 'Revenue']}
@@ -337,22 +321,22 @@ const Dashboard = () => {
         </div>
 
         {/* Campaign Performance */}
-        <div className="bg-black/20 backdrop-blur-lg rounded-2xl p-4 border border-white/20 mb-6 animate-fade-in-up">
-          <h2 className="text-white font-semibold text-sm mb-4">Campaign Performance</h2>
+        <div className="bg-black/20 backdrop-blur-lg rounded-xl p-4 border border-white/20 mb-6 animate-fade-in-up">
+          <h2 className="text-white font-semibold text-base mb-4">Campaign Performance</h2>
           <div className="space-y-3">
             {campaignPerformance.map((campaign, index) => (
               <div 
                 key={index}
-                className="flex items-center justify-between p-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300 group"
+                className="flex items-center justify-between p-3 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300 group"
               >
-                <div className="flex items-center space-x-3">
-                  <div className="text-xl">{campaign.icon}</div>
-                  <div>
-                    <p className="text-white text-xs font-medium">{campaign.name}</p>
+                <div className="flex items-center space-x-3 flex-1 min-w-0">
+                  <div className="text-lg flex-shrink-0">{campaign.icon}</div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-white text-sm font-medium truncate">{campaign.name}</p>
                     <p className="text-green-400 text-xs">{campaign.growth}</p>
                   </div>
                 </div>
-                <div className="text-right">
+                <div className="text-right flex-shrink-0 ml-3">
                   <p className="text-white font-bold text-sm">${campaign.value.toLocaleString()}</p>
                 </div>
               </div>
@@ -365,16 +349,16 @@ const Dashboard = () => {
           {socialMetrics.map((platform, index) => (
             <div 
               key={index}
-              className="bg-black/20 backdrop-blur-lg rounded-2xl p-4 border border-white/20 animate-fade-in-up group hover:scale-105 transition-transform duration-300"
+              className="bg-black/20 backdrop-blur-lg rounded-xl p-3 border border-white/20 animate-fade-in-up group"
               style={{ animationDelay: `${index * 100 + 400}ms` }}
             >
               <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center space-x-2">
-                  <span className="text-lg">{platform.icon}</span>
-                  <span className="text-white text-xs font-medium">{platform.platform}</span>
+                <div className="flex items-center space-x-2 flex-1 min-w-0">
+                  <span className="text-base flex-shrink-0">{platform.icon}</span>
+                  <span className="text-white text-sm font-medium truncate">{platform.platform}</span>
                 </div>
                 <div 
-                  className="w-2 h-2 rounded-full animate-pulse"
+                  className="w-2 h-2 rounded-full animate-pulse flex-shrink-0 ml-2"
                   style={{ backgroundColor: platform.color }}
                 />
               </div>
@@ -389,7 +373,7 @@ const Dashboard = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-white/70 text-xs">Followers</span>
-                  <span className="text-white text-xs font-bold">{platform.followers}</span>
+                  <span className="text-white text-xs font-bold truncate">{platform.followers}</span>
                 </div>
               </div>
             </div>
@@ -397,9 +381,9 @@ const Dashboard = () => {
         </div>
 
         {/* Traffic & Conversions Chart */}
-        <div className="bg-black/20 backdrop-blur-lg rounded-2xl p-4 border border-white/20 animate-fade-in-up">
-          <h2 className="text-white font-semibold text-sm mb-4">Traffic & Conversions</h2>
-          <div className="h-56">
+        <div className="bg-black/20 backdrop-blur-lg rounded-xl p-4 border border-white/20 animate-fade-in-up">
+          <h2 className="text-white font-semibold text-base mb-4">Traffic & Conversions</h2>
+          <div className="h-48">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={performanceData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
@@ -415,10 +399,11 @@ const Dashboard = () => {
                   stroke="rgba(255,255,255,0.7)"
                   axisLine={false}
                   tickLine={false}
+                  width={40}
                 />
                 <Tooltip 
                   contentStyle={{ 
-                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    backgroundColor: 'rgba(0, 0, 0, 0.9)',
                     backdropFilter: 'blur(10px)',
                     border: '1px solid rgba(255,255,255,0.2)',
                     borderRadius: '10px',
@@ -464,10 +449,10 @@ const Dashboard = () => {
             transform: translateY(0px) translateX(0px) rotate(0deg);
           }
           33% {
-            transform: translateY(-15px) translateX(8px) rotate(120deg);
+            transform: translateY(-10px) translateX(5px) rotate(120deg);
           }
           66% {
-            transform: translateY(8px) translateX(-8px) rotate(240deg);
+            transform: translateY(5px) translateX(-5px) rotate(240deg);
           }
         }
         
@@ -487,7 +472,7 @@ const Dashboard = () => {
             transform: translateY(0);
           }
           50% {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
           }
         }
 
@@ -506,6 +491,19 @@ const Dashboard = () => {
 
         .animate-bounce {
           animation: bounce 2s ease-in-out infinite;
+        }
+
+        /* Improved mobile responsiveness */
+        @media (max-width: 640px) {
+          .grid-cols-2 {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+
+        @media (max-width: 380px) {
+          .grid-cols-2 {
+            grid-template-columns: 1fr;
+          }
         }
 
         /* Custom scrollbar */

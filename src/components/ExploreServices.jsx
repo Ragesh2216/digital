@@ -440,42 +440,9 @@ const ExploreServices = () => {
         variants={containerVariants}
       >
         <div className="max-w-7xl mx-auto">
-          <motion.div className="text-center mb-16" variants={itemVariants}>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-4">
-              PPC Advertising Platforms
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              We manage campaigns across all major advertising platforms to reach your ideal customers wherever they are.
-            </p>
-          </motion.div>
+          
 
-          {/* Platform Tabs */}
-          <div className="mb-12">
-            <motion.div 
-              className="flex flex-wrap justify-center gap-4 mb-8"
-              variants={containerVariants}
-            >
-              {platforms.map((platform) => (
-                <motion.button
-                  key={platform.id}
-                  onClick={() => setActivePlatform(platform.id)}
-                  className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
-                    activePlatform === platform.id
-                      ? 'bg-green-600 text-white shadow-lg'
-                      : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
-                  }`}
-                  variants={itemVariants}
-                  whileHover={{ 
-                    scale: 1.05,
-                    y: -2
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <span className="mr-2">{platform.icon}</span>
-                  {platform.name}
-                </motion.button>
-              ))}
-            </motion.div>
+          
 
             {/* Platform Details */}
             <AnimatePresence mode="wait">
@@ -560,7 +527,7 @@ const ExploreServices = () => {
               </motion.div>
             </AnimatePresence>
           </div>
-        </div>
+      
       </motion.section>
 
       {/* Benefits Section */}
@@ -813,137 +780,9 @@ const ExploreServices = () => {
         </div>
       </motion.section>
 
-      {/* CTA Section */}
-      <motion.section 
-        className="py-20 bg-gradient-to-r from-green-600 to-blue-600 text-white"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        variants={containerVariants}
-      >
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <motion.h2 
-            className="text-3xl sm:text-4xl font-bold mb-6"
-            variants={itemVariants}
-          >
-            Ready to Launch High-Converting PPC Campaigns?
-          </motion.h2>
-          <motion.p 
-            className="text-xl text-green-100 mb-8"
-            variants={itemVariants}
-          >
-            Get your free PPC audit and discover how we can drive immediate, measurable results for your business.
-          </motion.p>
-          
-          <motion.div 
-            className="bg-white rounded-2xl p-8 shadow-2xl max-w-2xl mx-auto"
-            variants={bounceIn}
-            whileHover={{ 
-              y: -5,
-              transition: { type: "spring", stiffness: 300 }
-            }}
-          >
-            <h3 className="text-2xl font-bold text-gray-800 mb-6">Free PPC Strategy Session</h3>
-            
-            <motion.form className="space-y-4" variants={containerVariants}>
-              <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-4" variants={itemVariants}>
-                <motion.input
-                  type="text"
-                  name="name"
-                  required
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  whileFocus={{ scale: 1.02 }}
-                />
-                <motion.input
-                  type="email"
-                  name="email"
-                  required
-                  placeholder="Your Email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  whileFocus={{ scale: 1.02 }}
-                />
-              </motion.div>
-
-              <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-4" variants={itemVariants}>
-                <motion.input
-                  type="tel"
-                  name="phone"
-                  required
-                  placeholder="Phone Number"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  whileFocus={{ scale: 1.02 }}
-                />
-                <motion.input
-                  type="text"
-                  name="business"
-                  required
-                  placeholder="Business Name"
-                  value={formData.business}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                  whileFocus={{ scale: 1.02 }}
-                />
-              </motion.div>
-
-              <motion.select
-                name="budget"
-                value={formData.budget}
-                required
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                variants={itemVariants}
-                whileFocus={{ scale: 1.02 }}
-              >
-                <option value="">Monthly Advertising Budget</option>
-                <option value="500-1000">$500 - $1,000</option>
-                <option value="1000-2500">$1,000 - $2,500</option>
-                <option value="2500-5000">$2,500 - $5,000</option>
-                <option value="5000-10000">$5,000 - $10,000</option>
-                <option value="10000+">$10,000+</option>
-              </motion.select>
-              
-              <motion.textarea
-                name="goals"
-                placeholder="Your Advertising Goals & Challenges"
-                value={formData.goals}
-                onChange={handleInputChange}
-                required
-                rows="3"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                variants={itemVariants}
-                whileFocus={{ scale: 1.02 }}
-              ></motion.textarea>
-              
-              <motion.div variants={itemVariants}>
-                <Link to="/contact"
-                  className="w-full bg-green-600 text-white py-4 rounded-lg font-bold text-lg hover:bg-green-700 transition-colors block"
-                  whileHover={{ 
-                    scale: 1.02,
-                    boxShadow: "0 10px 25px -5px rgba(34, 197, 94, 0.4)"
-                  }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  🚀 Get Free PPC Strategy Session
-                </Link>
-              </motion.div>
-              
-              <motion.p 
-                className="text-sm text-gray-500 text-center"
-                variants={itemVariants}
-              >
-                We'll analyze your current advertising and provide a custom strategy within 24 hours.
-              </motion.p>
-            </motion.form>
-          </motion.div>
-        </div>
-      </motion.section>
+      
+    
+    
     </motion.div>
   );
 };

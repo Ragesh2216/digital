@@ -188,7 +188,7 @@ const Footer = () => {
 
         {/* Additional Info */}
         <div className="mt-6 pt-6 border-t border-purple-700/30 text-center">
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-black-500">
             stackly - Driving digital transformation through innovative marketing strategies. 
             Google Premier Partner • Meta Business Partner • Certified Marketing Professionals
           </p>

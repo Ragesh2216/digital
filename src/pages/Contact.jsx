@@ -14,9 +14,11 @@ const Contact = () => {
     budget: "",
     message: ""
   });
+  const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [touchedFields, setTouchedFields] = useState({});
 
   useEffect(() => {
     setIsVisible(true);
@@ -38,28 +40,161 @@ const Contact = () => {
     { number: 4, title: "Review", icon: "🚀", shortTitle: "Review" }
   ];
 
+  // Validation rules for each step
+  const validationRules = {
+    step1: ['name', 'company', 'email', 'phone'],
+    step2: ['objective', 'audience'],
+    step3: ['services', 'budget']
+  };
+
+  const validateField = (name, value) => {
+    const errors = {};
+    
+    switch (name) {
+      case 'name':
+        if (!value.trim()) errors.name = 'Full name is required';
+        else if (value.trim().length < 2) errors.name = 'Name must be at least 2 characters';
+        break;
+      case 'company':
+        if (!value.trim()) errors.company = 'Company name is required';
+        break;
+      case 'email':
+        if (!value.trim()) errors.email = 'Email is required';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) errors.email = 'Please enter a valid email address';
+        break;
+      case 'phone':
+        if (!value.trim()) errors.phone = 'Phone number is required';
+        else if (!/^\+?[\d\s\-()]{10,}$/.test(value)) errors.phone = 'Please enter a valid phone number';
+        break;
+      case 'objective':
+        if (!value) errors.objective = 'Please select your primary objective';
+        break;
+      case 'audience':
+        if (!value.trim()) errors.audience = 'Please describe your target audience';
+        else if (value.trim().length < 20) errors.audience = 'Please provide more details (minimum 20 characters)';
+        break;
+      case 'services':
+        if (!value || value.length === 0) errors.services = 'Please select at least one service';
+        break;
+      case 'budget':
+        if (!value) errors.budget = 'Please select your budget range';
+        break;
+      default:
+        break;
+    }
+    
+    return errors;
+  };
+
+  const validateStep = (step) => {
+    const fieldsToValidate = validationRules[`step${step}`];
+    const errors = {};
+    
+    fieldsToValidate.forEach(field => {
+      const fieldErrors = validateField(field, formData[field]);
+      Object.assign(errors, fieldErrors);
+    });
+    
+    return Object.keys(errors).length === 0;
+  };
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     
+    // Mark field as touched
+    setTouchedFields(prev => ({
+      ...prev,
+      [name]: true
+    }));
+    
     if (type === 'checkbox') {
+      const newServices = checked 
+        ? [...formData.services, value]
+        : formData.services.filter(service => service !== value);
+      
       setFormData(prev => ({
         ...prev,
-        services: checked 
-          ? [...prev.services, value]
-          : prev.services.filter(service => service !== value)
+        services: newServices
       }));
+      
     } else {
-      setFormData({
-        ...formData,
+      setFormData(prev => ({
+        ...prev,
         [name]: value
-      });
+      }));
     }
   };
 
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    setTouchedFields(prev => ({
+      ...prev,
+      [name]: true
+    }));
+    
+    const errors = validateField(name, value);
+    setFormErrors(prev => ({
+      ...prev,
+      [name]: errors[name]
+    }));
+  };
+
+  const handleServicesBlur = () => {
+    setTouchedFields(prev => ({
+      ...prev,
+      services: true
+    }));
+    
+    const errors = validateField('services', formData.services);
+    setFormErrors(prev => ({
+      ...prev,
+      services: errors.services
+    }));
+  };
+
+  const handleBudgetBlur = () => {
+    setTouchedFields(prev => ({
+      ...prev,
+      budget: true
+    }));
+    
+    const errors = validateField('budget', formData.budget);
+    setFormErrors(prev => ({
+      ...prev,
+      budget: errors.budget
+    }));
+  };
+
   const nextStep = () => {
-    if (validateStep(currentStep)) {
+    // Validate current step
+    const errors = {};
+    const fieldsToValidate = validationRules[`step${currentStep}`];
+    
+    fieldsToValidate.forEach(field => {
+      const fieldErrors = validateField(field, formData[field]);
+      Object.assign(errors, fieldErrors);
+    });
+    
+    setFormErrors(errors);
+    
+    if (Object.keys(errors).length === 0) {
       setCurrentStep(prev => Math.min(prev + 1, steps.length));
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      // Mark all fields in current step as touched to show errors
+      const fieldsToTouch = fieldsToValidate.reduce((acc, field) => {
+        acc[field] = true;
+        return acc;
+      }, {});
+      setTouchedFields(prev => ({ ...prev, ...fieldsToTouch }));
+      
+      // Scroll to first error
+      setTimeout(() => {
+        const firstError = document.querySelector('.border-red-500');
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 100);
     }
   };
 
@@ -68,21 +203,44 @@ const Contact = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const validateStep = (step) => {
-    switch (step) {
-      case 1:
-        return formData.name && formData.email && formData.company;
-      case 2:
-        return formData.objective;
-      case 3:
-        return formData.services.length > 0;
-      default:
-        return true;
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Validate all steps before submission
+    let allValid = true;
+    const allErrors = {};
+    
+    for (let step = 1; step <= 3; step++) {
+      const fieldsToValidate = validationRules[`step${step}`];
+      fieldsToValidate.forEach(field => {
+        const fieldErrors = validateField(field, formData[field]);
+        Object.assign(allErrors, fieldErrors);
+      });
+    }
+    
+    setFormErrors(allErrors);
+    
+    if (Object.keys(allErrors).length > 0) {
+      allValid = false;
+      // Mark all fields as touched to show errors
+      const allFieldsToTouch = {};
+      for (let step = 1; step <= 3; step++) {
+        validationRules[`step${step}`].forEach(field => {
+          allFieldsToTouch[field] = true;
+        });
+      }
+      setTouchedFields(prev => ({ ...prev, ...allFieldsToTouch }));
+      
+      // Scroll to first error
+      setTimeout(() => {
+        const firstError = document.querySelector('.border-red-500');
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 100);
+      return;
+    }
+    
     setIsSubmitting(true);
     
     setTimeout(() => {
@@ -99,7 +257,15 @@ const Contact = () => {
         budget: "", 
         message: "" 
       });
+      setFormErrors({});
+      setTouchedFields({});
     }, 2000);
+  };
+
+  const getStepStatus = (stepNumber) => {
+    if (stepNumber < currentStep) return 'completed';
+    if (stepNumber === currentStep) return 'current';
+    return 'upcoming';
   };
 
   if (isSubmitted) {
@@ -162,10 +328,6 @@ const Contact = () => {
             }}
           />
         ))}
-        
-        <div className="absolute top-1/4 -left-10 w-48 h-48 sm:w-72 sm:h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse-slow"></div>
-        <div className="absolute top-1/2 -right-10 w-48 h-48 sm:w-72 sm:h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse-slow" style={{animationDelay: '2s'}}></div>
-        <div className="absolute bottom-1/4 left-1/2 w-48 h-48 sm:w-72 sm:h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse-slow" style={{animationDelay: '4s'}}></div>
       </div>
 
       <main className="pb-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto relative z-10">
@@ -183,7 +345,7 @@ const Contact = () => {
           </p>
         </section>
 
-        {/* Progress Steps - Mobile Optimized */}
+        {/* Progress Steps */}
         <div className="flex justify-between mb-6 sm:mb-8 relative">
           <div className="absolute top-1/2 left-0 right-0 h-1 sm:h-2 bg-gray-200 -translate-y-1/2 -z-10 rounded-full"></div>
           <div 
@@ -191,27 +353,32 @@ const Contact = () => {
             style={{ width: `${((currentStep - 1) / (steps.length - 1)) * 100}%` }}
           ></div>
           
-          {steps.map((step) => (
-            <div key={step.number} className="flex flex-col items-center">
-              <div className={`w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full flex items-center justify-center text-white font-semibold transition-all duration-500 shadow-lg ${
-                currentStep >= step.number 
-                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 scale-110' 
-                  : 'bg-gray-300'
-              }`}>
-                {currentStep > step.number ? (
-                  <span className="text-sm sm:text-base">✓</span>
-                ) : (
-                  <span className="text-sm sm:text-base">{step.icon}</span>
-                )}
+          {steps.map((step) => {
+            const status = getStepStatus(step.number);
+            return (
+              <div key={step.number} className="flex flex-col items-center">
+                <div className={`w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full flex items-center justify-center text-white font-semibold transition-all duration-500 shadow-lg ${
+                  status === 'completed' 
+                    ? 'bg-gradient-to-r from-green-500 to-emerald-500 scale-110' 
+                    : status === 'current'
+                    ? 'bg-gradient-to-r from-purple-500 to-pink-500 scale-110 ring-4 ring-purple-200'
+                    : 'bg-gray-300'
+                }`}>
+                  {status === 'completed' ? (
+                    <span className="text-sm sm:text-base">✓</span>
+                  ) : (
+                    <span className="text-sm sm:text-base">{step.icon}</span>
+                  )}
+                </div>
+                <span className={`mt-1 sm:mt-2 text-xs sm:text-sm font-medium ${
+                  status !== 'upcoming' ? 'text-gray-900' : 'text-gray-500'
+                }`}>
+                  <span className="hidden sm:inline">{step.title}</span>
+                  <span className="sm:hidden">{step.shortTitle}</span>
+                </span>
               </div>
-              <span className={`mt-1 sm:mt-2 text-xs sm:text-sm font-medium ${
-                currentStep >= step.number ? 'text-gray-900' : 'text-gray-500'
-              }`}>
-                <span className="hidden sm:inline">{step.title}</span>
-                <span className="sm:hidden">{step.shortTitle}</span>
-              </span>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Form Container */}
@@ -225,10 +392,10 @@ const Contact = () => {
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 {[
-                  { label: "Full Name *", name: "name", type: "text", placeholder: "Your full name" },
-                  { label: "Company *", name: "company", type: "text", placeholder: "Your company" },
-                  { label: "Email *", name: "email", type: "email", placeholder: "your.email@company.com" },
-                  { label: "Phone", name: "phone", type: "tel", placeholder: "+1 (555) 123-4567" }
+                  { label: "Full Name *", name: "name", type: "text", placeholder: "Your full name", required: true },
+                  { label: "Company *", name: "company", type: "text", placeholder: "Your company", required: true },
+                  { label: "Email *", name: "email", type: "email", placeholder: "your.email@company.com", required: true },
+                  { label: "Phone *", name: "phone", type: "tel", placeholder: "+1 (555) 123-4567", required: true }
                 ].map((field, index) => (
                   <div key={index} className="animate-fade-in-up" style={{ animationDelay: `${index * 100}ms` }}>
                     <label className="block text-sm font-medium text-gray-700 mb-2">{field.label}</label>
@@ -237,10 +404,29 @@ const Contact = () => {
                       name={field.name}
                       value={formData[field.name]}
                       onChange={handleChange}
-                      className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 transform hover:scale-105"
+                      onBlur={handleBlur}
+                      className={`w-full px-3 sm:px-4 py-2 sm:py-3 border rounded-lg sm:rounded-xl focus:ring-2 focus:border-transparent transition-all duration-300 ${
+                        formErrors[field.name] && touchedFields[field.name]
+                          ? 'border-red-500 focus:ring-red-500 bg-red-50' 
+                          : formData[field.name] && !formErrors[field.name] && touchedFields[field.name]
+                          ? 'border-green-500 focus:ring-green-500 bg-green-50'
+                          : 'border-gray-300 focus:ring-purple-500 hover:border-purple-300'
+                      }`}
                       placeholder={field.placeholder}
-                      required={field.name !== 'phone'}
+                      required={field.required}
                     />
+                    {formErrors[field.name] && touchedFields[field.name] && (
+                      <p className="mt-1 text-xs text-red-600 flex items-center gap-1">
+                        <span>⚠️</span>
+                        {formErrors[field.name]}
+                      </p>
+                    )}
+                    {formData[field.name] && !formErrors[field.name] && touchedFields[field.name] && (
+                      <p className="mt-1 text-xs text-green-600 flex items-center gap-1">
+                        <span>✅</span>
+                        Looks good!
+                      </p>
+                    )}
                   </div>
                 ))}
               </div>
@@ -261,27 +447,71 @@ const Contact = () => {
                     name="objective"
                     value={formData.objective}
                     onChange={handleChange}
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 transform hover:scale-105"
+                    onBlur={handleBlur}
+                    className={`w-full px-3 sm:px-4 py-2 sm:py-3 border rounded-lg sm:rounded-xl focus:ring-2 focus:border-transparent transition-all duration-300 ${
+                      formErrors.objective && touchedFields.objective
+                        ? 'border-red-500 focus:ring-red-500 bg-red-50' 
+                        : formData.objective && !formErrors.objective && touchedFields.objective
+                        ? 'border-green-500 focus:ring-green-500 bg-green-50'
+                        : 'border-gray-300 focus:ring-purple-500 hover:border-purple-300'
+                    }`}
                     required
                   >
-                    <option value="">Select your main goal</option>
+                    <option value="">Select your main goal *</option>
                     <option value="traffic">Increase Website Traffic</option>
                     <option value="leads">Generate More Leads</option>
                     <option value="sales">Boost Sales</option>
                     <option value="awareness">Improve Brand Awareness</option>
                     <option value="social">Enhance Social Media Presence</option>
+                    <option value="conversion">Improve Conversion Rate</option>
+                    <option value="retention">Customer Retention</option>
                   </select>
+                  {formErrors.objective && touchedFields.objective && (
+                    <p className="mt-1 text-xs text-red-600 flex items-center gap-1">
+                      <span>⚠️</span>
+                      {formErrors.objective}
+                    </p>
+                  )}
+                  {formData.objective && !formErrors.objective && touchedFields.objective && (
+                    <p className="mt-1 text-xs text-green-600 flex items-center gap-1">
+                      <span>✅</span>
+                      Great objective selected!
+                    </p>
+                  )}
                 </div>
                 <div className="animate-fade-in-up" style={{ animationDelay: '200ms' }}>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Target Audience</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Target Audience *</label>
                   <textarea
                     name="audience"
                     value={formData.audience}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     rows="3"
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 transform hover:scale-105 resize-vertical"
-                    placeholder="Describe your ideal customers, their interests, and demographics..."
+                    className={`w-full px-3 sm:px-4 py-2 sm:py-3 border rounded-lg sm:rounded-xl focus:ring-2 focus:border-transparent transition-all duration-300 resize-vertical ${
+                      formErrors.audience && touchedFields.audience
+                        ? 'border-red-500 focus:ring-red-500 bg-red-50' 
+                        : formData.audience && !formErrors.audience && touchedFields.audience
+                        ? 'border-green-500 focus:ring-green-500 bg-green-50'
+                        : 'border-gray-300 focus:ring-purple-500 hover:border-purple-300'
+                    }`}
+                    placeholder="Describe your ideal customers, their interests, demographics, age group, location, and behaviors..."
+                    required
                   ></textarea>
+                  {formErrors.audience && touchedFields.audience && (
+                    <p className="mt-1 text-xs text-red-600 flex items-center gap-1">
+                      <span>⚠️</span>
+                      {formErrors.audience}
+                    </p>
+                  )}
+                  {formData.audience && !formErrors.audience && touchedFields.audience && (
+                    <p className="mt-1 text-xs text-green-600 flex items-center gap-1">
+                      <span>✅</span>
+                      Detailed audience description!
+                    </p>
+                  )}
+                  <p className="mt-1 text-xs text-gray-500">
+                    Minimum 20 characters required. Include demographics, interests, and behaviors.
+                  </p>
                 </div>
               </div>
             </div>
@@ -289,28 +519,39 @@ const Contact = () => {
 
           {/* Step 3: Services */}
           {currentStep === 3 && (
-            <div className="animate-fade-in-up">
+            <div className="animate-fade-in-up" onBlur={handleServicesBlur}>
               <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 flex items-center gap-2">
                 <span className="text-2xl">📊</span>
                 Marketing Services Needed
               </h3>
               <div className="space-y-4 sm:space-y-6">
                 <div className="animate-fade-in-up">
-                  <label className="block text-sm font-medium text-gray-700 mb-3 sm:mb-4">Select Services (Choose all that apply) *</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-3 sm:mb-4">
+                    Select Services (Choose at least one) *
+                    {formErrors.services && touchedFields.services && (
+                      <span className="text-red-600 ml-2 text-xs font-normal">- {formErrors.services}</span>
+                    )}
+                  </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                     {[
-                      { id: 'seo', label: 'SEO Optimization', icon: '🔍' },
-                      { id: 'ppc', label: 'PPC Advertising', icon: '💸' },
-                      { id: 'social', label: 'Social Media', icon: '📱' },
-                      { id: 'email', label: 'Email Marketing', icon: '✉️' },
-                      { id: 'content', label: 'Content Creation', icon: '📝' },
-                      { id: 'web', label: 'Web Design', icon: '💻' },
-                      { id: 'analytics', label: 'Analytics', icon: '📈' },
-                      { id: 'strategy', label: 'Marketing Strategy', icon: '🎯' }
+                      { id: 'seo', label: 'SEO Optimization', icon: '🔍', description: 'Improve search rankings' },
+                      { id: 'ppc', label: 'PPC Advertising', icon: '💸', description: 'Google & social ads' },
+                      { id: 'social', label: 'Social Media', icon: '📱', description: 'Platform management' },
+                      { id: 'email', label: 'Email Marketing', icon: '✉️', description: 'Campaigns & automation' },
+                      { id: 'content', label: 'Content Creation', icon: '📝', description: 'Blogs & copywriting' },
+                      { id: 'web', label: 'Web Design', icon: '💻', description: 'UI/UX development' },
+                      { id: 'analytics', label: 'Analytics', icon: '📈', description: 'Data & reporting' },
+                      { id: 'strategy', label: 'Marketing Strategy', icon: '🎯', description: 'Complete planning' }
                     ].map((service, index) => (
                       <label 
                         key={service.id} 
-                        className="flex items-center space-x-2 sm:space-x-3 p-3 border border-gray-200 rounded-lg sm:rounded-xl hover:bg-purple-50 cursor-pointer transition-all duration-300 transform hover:scale-105 animate-fade-in-up"
+                        className={`flex items-start space-x-2 sm:space-x-3 p-3 border rounded-lg sm:rounded-xl cursor-pointer transition-all duration-300 ${
+                          formData.services.includes(service.id)
+                            ? 'bg-gradient-to-r from-purple-50 to-pink-50 border-purple-500 shadow-md scale-105'
+                            : formErrors.services && touchedFields.services
+                            ? 'border-red-200 hover:border-red-300'
+                            : 'border-gray-200 hover:border-purple-300 hover:bg-purple-50'
+                        }`}
                         style={{ animationDelay: `${index * 50}ms` }}
                       >
                         <input 
@@ -319,22 +560,44 @@ const Contact = () => {
                           value={service.id}
                           checked={formData.services.includes(service.id)}
                           onChange={handleChange}
-                          className="w-4 h-4 text-purple-600 rounded focus:ring-purple-500" 
+                          className="w-4 h-4 text-purple-600 rounded focus:ring-purple-500 mt-1" 
                         />
-                        <span className="text-lg">{service.icon}</span>
-                        <span className="text-gray-700 text-sm sm:text-base">{service.label}</span>
+                        <div className="flex-1">
+                          <div className="flex items-center space-x-2 mb-1">
+                            <span className="text-lg">{service.icon}</span>
+                            <span className="text-gray-700 text-sm sm:text-base font-medium">{service.label}</span>
+                          </div>
+                          <p className="text-gray-500 text-xs">{service.description}</p>
+                        </div>
                       </label>
                     ))}
                   </div>
+                  {formData.services.length > 0 && !formErrors.services && touchedFields.services && (
+                    <p className="mt-3 text-xs text-green-600 flex items-center gap-1">
+                      <span>✅</span>
+                      {formData.services.length} service(s) selected - Great choices!
+                    </p>
+                  )}
+                  {formErrors.services && touchedFields.services && (
+                    <p className="mt-3 text-xs text-red-600 flex items-center gap-1">
+                      <span>⚠️</span>
+                      Please select at least one service to continue
+                    </p>
+                  )}
                 </div>
-                <div className="animate-fade-in-up" style={{ animationDelay: '400ms' }}>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Monthly Budget</label>
-                  <div className="grid grid-cols-2 sm:flex sm:space-x-4 gap-3">
+                <div className="animate-fade-in-up" style={{ animationDelay: '400ms' }} onBlur={handleBudgetBlur}>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Monthly Budget *
+                    {formErrors.budget && touchedFields.budget && (
+                      <span className="text-red-600 ml-2 text-xs font-normal">- {formErrors.budget}</span>
+                    )}
+                  </label>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     {[
-                      { value: '1k-5k', label: '$1K-5K' },
-                      { value: '5k-15k', label: '$5K-15K' },
-                      { value: '15k-50k', label: '$15K-50K' },
-                      { value: '50k+', label: '$50K+' }
+                      { value: '1k-5k', label: '$1K-5K', description: 'Starter' },
+                      { value: '5k-15k', label: '$5K-15K', description: 'Growth' },
+                      { value: '15k-50k', label: '$15K-50K', description: 'Professional' },
+                      { value: '50k+', label: '$50K+', description: 'Enterprise' }
                     ].map((budget, index) => (
                       <label key={budget.value} className="flex-1">
                         <input 
@@ -345,16 +608,31 @@ const Contact = () => {
                           onChange={handleChange}
                           className="sr-only" 
                         />
-                        <div className={`p-3 border border-gray-200 rounded-lg sm:rounded-xl text-center transition-all duration-300 cursor-pointer text-sm sm:text-base ${
+                        <div className={`p-3 border rounded-lg sm:rounded-xl text-center transition-all duration-300 cursor-pointer ${
                           formData.budget === budget.value
                             ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg scale-105'
-                            : 'hover:border-purple-500 hover:bg-purple-50'
+                            : formErrors.budget && touchedFields.budget
+                            ? 'border-red-500 hover:border-red-600 bg-red-50'
+                            : 'border-gray-200 hover:border-purple-500 hover:bg-purple-50'
                         }`}>
-                          {budget.label}
+                          <div className="text-sm sm:text-base font-semibold">{budget.label}</div>
+                          <div className="text-xs opacity-80 mt-1">{budget.description}</div>
                         </div>
                       </label>
                     ))}
                   </div>
+                  {formData.budget && !formErrors.budget && touchedFields.budget && (
+                    <p className="mt-3 text-xs text-green-600 flex items-center gap-1">
+                      <span>✅</span>
+                      Budget range selected - Perfect for planning!
+                    </p>
+                  )}
+                  {formErrors.budget && touchedFields.budget && (
+                    <p className="mt-3 text-xs text-red-600 flex items-center gap-1">
+                      <span>⚠️</span>
+                      Please select your budget range to continue
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -369,26 +647,50 @@ const Contact = () => {
               </h3>
               <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 space-y-4 sm:space-y-6 border border-purple-100">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                  <div className="bg-white/80 backdrop-blur-sm p-3 rounded-lg">
-                    <strong className="text-purple-600">Name:</strong>
-                    <div className="text-gray-700 mt-1">{formData.name || "Not provided"}</div>
-                  </div>
-                  <div className="bg-white/80 backdrop-blur-sm p-3 rounded-lg">
-                    <strong className="text-purple-600">Company:</strong>
-                    <div className="text-gray-700 mt-1">{formData.company || "Not provided"}</div>
-                  </div>
-                  <div className="bg-white/80 backdrop-blur-sm p-3 rounded-lg">
-                    <strong className="text-purple-600">Email:</strong>
-                    <div className="text-gray-700 mt-1">{formData.email || "Not provided"}</div>
-                  </div>
-                  <div className="bg-white/80 backdrop-blur-sm p-3 rounded-lg">
-                    <strong className="text-purple-600">Objective:</strong>
-                    <div className="text-gray-700 mt-1">{formData.objective || "Not provided"}</div>
+                  {[
+                    { label: 'Full Name', value: formData.name, required: true },
+                    { label: 'Company', value: formData.company, required: true },
+                    { label: 'Email', value: formData.email, required: true },
+                    { label: 'Phone', value: formData.phone, required: true },
+                    { label: 'Primary Objective', value: formData.objective, required: true },
+                    { label: 'Monthly Budget', value: formData.budget ? `$${formData.budget.toUpperCase()}` : null, required: true }
+                  ].map((item, index) => (
+                    <div key={index} className={`bg-white/80 backdrop-blur-sm p-3 rounded-lg border ${
+                      item.value ? 'border-green-200' : 'border-red-200'
+                    }`}>
+                      <strong className={`flex items-center gap-2 ${
+                        item.value ? 'text-purple-600' : 'text-red-600'
+                      }`}>
+                        {item.value ? '✅' : '⚠️'} {item.label} *
+                      </strong>
+                      <div className={`mt-1 ${item.value ? 'text-gray-700' : 'text-red-500 font-medium'}`}>
+                        {item.value || 'MISSING - Please go back and fill this field'}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className={`bg-white/80 backdrop-blur-sm p-3 rounded-lg border ${
+                  formData.audience ? 'border-green-200' : 'border-red-200'
+                }`}>
+                  <strong className={`flex items-center gap-2 ${
+                    formData.audience ? 'text-purple-600' : 'text-red-600'
+                  }`}>
+                    {formData.audience ? '✅' : '⚠️'} Target Audience *
+                  </strong>
+                  <div className={`mt-1 ${formData.audience ? 'text-gray-700' : 'text-red-500 font-medium'}`}>
+                    {formData.audience || 'MISSING - Please go back and describe your target audience'}
                   </div>
                 </div>
                 
-                <div className="bg-white/80 backdrop-blur-sm p-3 rounded-lg">
-                  <strong className="text-purple-600">Services Selected:</strong>
+                <div className={`bg-white/80 backdrop-blur-sm p-3 rounded-lg border ${
+                  formData.services.length > 0 ? 'border-green-200' : 'border-red-200'
+                }`}>
+                  <strong className={`flex items-center gap-2 ${
+                    formData.services.length > 0 ? 'text-purple-600' : 'text-red-600'
+                  }`}>
+                    {formData.services.length > 0 ? '✅' : '⚠️'} Services Selected *
+                  </strong>
                   <div className="flex flex-wrap gap-2 mt-2">
                     {formData.services.length > 0 ? (
                       formData.services.map(service => (
@@ -397,26 +699,58 @@ const Contact = () => {
                         </span>
                       ))
                     ) : (
-                      <span className="text-gray-500">No services selected</span>
+                      <span className="text-red-500 font-medium">MISSING - Please go back and select at least one service</span>
                     )}
                   </div>
                 </div>
-                
-                <div className="bg-white/80 backdrop-blur-sm p-3 rounded-lg">
-                  <strong className="text-purple-600">Budget:</strong>
-                  <div className="text-gray-700 mt-1">{formData.budget ? `$${formData.budget.toUpperCase()}` : "Not specified"}</div>
-                </div>
 
                 <div className="animate-fade-in-up" style={{ animationDelay: '200ms' }}>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Additional Notes (Optional)</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Additional Notes (Optional)
+                    <span className="text-gray-500 font-normal ml-1">- Help us understand your specific needs better</span>
+                  </label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    rows="3"
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 resize-vertical"
-                    placeholder="Any additional information or specific requirements..."
+                    rows="4"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 resize-vertical bg-white"
+                    placeholder="Any specific requirements, timeline, current challenges, or additional information that would help us serve you better..."
                   ></textarea>
+                  <p className="mt-1 text-xs text-gray-500">
+                    This field is optional but recommended for better service customization.
+                  </p>
+                </div>
+
+                {/* Final Validation Check */}
+                <div className={`p-4 rounded-lg border-2 ${
+                  validateStep(1) && validateStep(2) && validateStep(3) 
+                    ? 'bg-green-50 border-green-500' 
+                    : 'bg-red-50 border-red-500'
+                }`}>
+                  <div className="flex items-center gap-3">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                      validateStep(1) && validateStep(2) && validateStep(3) 
+                        ? 'bg-green-500 text-white' 
+                        : 'bg-red-500 text-white'
+                    }`}>
+                      {validateStep(1) && validateStep(2) && validateStep(3) ? '✓' : '!'}
+                    </div>
+                    <div>
+                      <p className={`font-semibold ${
+                        validateStep(1) && validateStep(2) && validateStep(3) 
+                          ? 'text-green-800' 
+                          : 'text-red-800'
+                      }`}>
+                        {validateStep(1) && validateStep(2) && validateStep(3) 
+                          ? 'All required information provided! Ready to submit.' 
+                          : 'Missing required information. Please complete all steps.'}
+                      </p>
+                      <p className="text-sm text-gray-600 mt-1">
+                        We need all required fields (marked with *) to create your customized marketing proposal.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -437,8 +771,12 @@ const Contact = () => {
               <button
                 type="button"
                 onClick={nextStep}
+                className={`px-4 sm:px-6 py-2 sm:py-3 rounded-lg sm:rounded-xl text-white transition-all duration-300 transform hover:scale-105 text-sm sm:text-base ${
+                  validateStep(currentStep)
+                    ? 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 shadow-lg'
+                    : 'bg-gray-400 cursor-not-allowed opacity-70'
+                }`}
                 disabled={!validateStep(currentStep)}
-                className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg sm:rounded-xl hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
               >
                 Next Step →
               </button>
@@ -446,8 +784,8 @@ const Contact = () => {
               <button
                 type="submit"
                 onClick={handleSubmit}
-                disabled={isSubmitting}
-                className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg sm:rounded-xl hover:from-green-600 hover:to-emerald-600 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 flex items-center gap-2 text-sm sm:text-base"
+                disabled={isSubmitting || !(validateStep(1) && validateStep(2) && validateStep(3))}
+                className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg sm:rounded-xl hover:from-green-600 hover:to-emerald-600 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 text-sm sm:text-base shadow-lg"
               >
                 {isSubmitting ? (
                   <>
@@ -538,17 +876,6 @@ const Contact = () => {
           }
         }
         
-        @keyframes pulse-slow {
-          0%, 100% {
-            opacity: 0.3;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 0.5;
-            transform: scale(1.05);
-          }
-        }
-        
         @keyframes success-pop {
           0% {
             opacity: 0;
@@ -570,10 +897,6 @@ const Contact = () => {
         
         .animate-float-slow {
           animation: float-slow 12s ease-in-out infinite;
-        }
-        
-        .animate-pulse-slow {
-          animation: pulse-slow 6s ease-in-out infinite;
         }
         
         .animate-success-pop {
