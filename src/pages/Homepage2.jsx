@@ -6,7 +6,7 @@ import Latest from "../pages/Latest";
 
 const Homepage2 = () => {
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+        <div className="min-h-screen w-full overflow-x-hidden">
             {/* Remove pt-16 from here since ExploreServices already has it */}
             <ExploreServices />
             <InventoryOptimization/>
