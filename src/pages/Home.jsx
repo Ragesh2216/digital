@@ -581,54 +581,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Process Section - Mobile Optimized */}
-      <section className="py-8 min-[320px]:py-10 sm:py-12 lg:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-3 min-[320px]:px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-6 min-[320px]:mb-8 lg:mb-16"
-          >
-            <h2 className="text-xl min-[320px]:text-2xl min-[375px]:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 min-[320px]:mb-4 leading-tight">
-              Our Digital Marketing Process
-            </h2>
-            <p className="text-sm min-[320px]:text-base sm:text-lg lg:text-xl text-gray-600 max-w-xs min-[320px]:max-w-sm sm:max-w-md lg:max-w-3xl mx-auto px-2 min-[320px]:px-4">
-              A proven framework for driving sustainable growth and measurable results.
-            </p>
-          </motion.div>
-
-          <div className="relative">
-            <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 transform -translate-y-1/2 z-0"></div>
-            
-            <div className="grid grid-cols-1 min-[320px]:grid-cols-2 lg:grid-cols-5 gap-3 min-[320px]:gap-4 lg:gap-8 relative z-10">
-              {marketingProcess.map((step, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.2 }}
-                  whileHover={{ scale: 1.03 }}
-                  className="bg-gradient-to-br from-white to-gray-50 rounded-lg sm:rounded-xl lg:rounded-2xl p-3 min-[320px]:p-4 lg:p-6 shadow-md border border-gray-100 text-center group hover:shadow-lg transition-all duration-500"
-                >
-                  <div className="w-10 h-10 min-[320px]:w-12 min-[320px]:h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-base min-[320px]:text-lg lg:text-xl mb-2 min-[320px]:mb-3 lg:mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                    {step.step}
-                  </div>
-                  <div className="w-10 h-10 min-[320px]:w-12 min-[320px]:h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-blue-100 rounded-lg sm:rounded-xl lg:rounded-2xl flex items-center justify-center text-blue-600 mb-2 min-[320px]:mb-3 lg:mb-4 mx-auto group-hover:bg-blue-200 transition-colors duration-300">
-                    {step.icon}
-                  </div>
-                  <h3 className="text-sm min-[320px]:text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-1 min-[320px]:mb-2 lg:mb-3 leading-tight">
-                    {step.title}
-                  </h3>
-                  <p className="text-gray-600 text-xs min-[320px]:text-sm leading-relaxed">
-                    {step.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Case Studies */}
       <section className="py-8 min-[320px]:py-10 sm:py-12 lg:py-20 bg-gray-900 text-white">
