@@ -313,16 +313,7 @@ export default function Login() {
               <div className="space-y-4 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
                 {isLogin ? (
                   <div className="flex items-center justify-between">
-                    <label className="flex items-center">
-                      <input
-                        type="checkbox"
-                        name="rememberMe"
-                        checked={formData.rememberMe}
-                        onChange={handleInputChange}
-                        className="w-4 h-4 text-purple-500 bg-white/5 border-white/10 rounded focus:ring-purple-500"
-                      />
-                      <span className="ml-2 text-sm text-white/70">Remember me</span>
-                    </label>
+                    
                     <Link to="/404" className="text-sm text-cyan-300 hover:text-cyan-200 transition-colors duration-300 font-semibold">
                       Forgot password?
                     </Link>
