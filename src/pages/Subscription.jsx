@@ -228,7 +228,7 @@ const CheckoutPage = ({ planId, onBack, onComplete }) => {
     };
 
     return (
-        <div className="max-w-xl mx-auto p-8 bg-white rounded-2xl shadow-2xl animate-slide-up border border-purple-100">
+        <div className="max-w-xl mx-auto p-8 mt-16 bg-white rounded-2xl shadow-2xl animate-slide-up border border-purple-100">
             <div className="animate-fade-in">
                 <h1 className="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-4">
                     Complete Your Marketing Plan

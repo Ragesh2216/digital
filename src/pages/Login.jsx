@@ -13,6 +13,7 @@ export default function Login() {
     rememberMe: false,
     agreeToTerms: false
   });
+  const [formErrors, setFormErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -20,16 +21,71 @@ export default function Login() {
     setIsVisible(true);
   }, []);
 
+  const validateForm = () => {
+    const errors = {};
+
+    // Email validation
+    if (!formData.email.trim()) {
+      errors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = 'Please enter a valid email address';
+    }
+
+    // Password validation
+    if (!formData.password) {
+      errors.password = 'Password is required';
+    } else if (formData.password.length < 6) {
+      errors.password = 'Password must be at least 6 characters';
+    }
+
+    // Signup specific validations
+    if (!isLogin) {
+      if (!formData.firstName.trim()) {
+        errors.firstName = 'First name is required';
+      }
+      if (!formData.lastName.trim()) {
+        errors.lastName = 'Last name is required';
+      }
+      if (!formData.confirmPassword) {
+        errors.confirmPassword = 'Please confirm your password';
+      } else if (formData.password !== formData.confirmPassword) {
+        errors.confirmPassword = 'Passwords do not match';
+      }
+      if (!formData.agreeToTerms) {
+        errors.agreeToTerms = 'You must agree to the terms and conditions';
+      }
+    }
+
+    return errors;
+  };
+
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }));
+
+    // Clear error when user starts typing
+    if (formErrors[name]) {
+      setFormErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    const errors = validateForm();
+    setFormErrors(errors);
+    
+    // Check if there are any errors
+    if (Object.keys(errors).length > 0) {
+      return; // Prevent form submission
+    }
+
     setIsLoading(true);
     
     // Simulate API call and then navigate to 404
@@ -52,8 +108,30 @@ export default function Login() {
         rememberMe: false,
         agreeToTerms: false
       });
+      setFormErrors({});
       setIsVisible(true);
     }, 300);
+  };
+
+  // Check if form is valid for button enabling
+  const isFormValid = () => {
+    if (isLogin) {
+      return formData.email && formData.password && !formErrors.email && !formErrors.password;
+    } else {
+      return (
+        formData.firstName &&
+        formData.lastName &&
+        formData.email &&
+        formData.password &&
+        formData.confirmPassword &&
+        formData.agreeToTerms &&
+        !formErrors.firstName &&
+        !formErrors.lastName &&
+        !formErrors.email &&
+        !formErrors.password &&
+        !formErrors.confirmPassword
+      );
+    }
   };
 
   return (
@@ -101,10 +179,8 @@ export default function Login() {
       <div className="w-full max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Side - Marketing Hero */}
-          <div className={`text-center mt-16  lg:text-left transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
+          <div className={`text-center mt-16 lg:text-left transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             <div className="mb-12">
-              
-              
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-black mb-6">
                 <span className="bg-gradient-to-r from-purple-300 via-pink-300 to-blue-300 bg-clip-text text-transparent">
                   {isLogin ? "Welcome Back" : "Join The"}
@@ -223,10 +299,17 @@ export default function Login() {
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleInputChange}
-                      required={!isLogin}
-                      className="w-full px-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 hover:border-white/20 placeholder-white/40 backdrop-blur-sm"
+                      className={`w-full px-4 py-4 bg-white/5 border text-white rounded-2xl focus:ring-2 focus:ring-purple-500 transition-all duration-300 hover:border-white/20 placeholder-white/40 backdrop-blur-sm ${
+                        formErrors.firstName ? 'border-red-400 ring-2 ring-red-400/30' : 'border-white/10'
+                      }`}
                       placeholder="Enter your first name"
                     />
+                    {formErrors.firstName && (
+                      <p className="text-red-300 text-sm mt-2 flex items-center gap-2">
+                        <span className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></span>
+                        {formErrors.firstName}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="lastName" className="block text-sm font-semibold text-white mb-3">
@@ -238,10 +321,17 @@ export default function Login() {
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleInputChange}
-                      required={!isLogin}
-                      className="w-full px-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 hover:border-white/20 placeholder-white/40 backdrop-blur-sm"
+                      className={`w-full px-4 py-4 bg-white/5 border text-white rounded-2xl focus:ring-2 focus:ring-purple-500 transition-all duration-300 hover:border-white/20 placeholder-white/40 backdrop-blur-sm ${
+                        formErrors.lastName ? 'border-red-400 ring-2 ring-red-400/30' : 'border-white/10'
+                      }`}
                       placeholder="Enter your last name"
                     />
+                    {formErrors.lastName && (
+                      <p className="text-red-300 text-sm mt-2 flex items-center gap-2">
+                        <span className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></span>
+                        {formErrors.lastName}
+                      </p>
+                    )}
                   </div>
                 </div>
               )}
@@ -257,10 +347,17 @@ export default function Login() {
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 hover:border-white/20 placeholder-white/40 backdrop-blur-sm"
+                  className={`w-full px-4 py-4 bg-white/5 border text-white rounded-2xl focus:ring-2 focus:ring-purple-500 transition-all duration-300 hover:border-white/20 placeholder-white/40 backdrop-blur-sm ${
+                    formErrors.email ? 'border-red-400 ring-2 ring-red-400/30' : 'border-white/10'
+                  }`}
                   placeholder="your.email@company.com"
                 />
+                {formErrors.email && (
+                  <p className="text-red-300 text-sm mt-2 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></span>
+                    {formErrors.email}
+                  </p>
+                )}
               </div>
 
               {/* Password Field */}
@@ -274,10 +371,17 @@ export default function Login() {
                   name="password"
                   value={formData.password}
                   onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-4 bg-white/5 border border-white/10 text-white rounded-2xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all duration-300 hover:border-white/20 placeholder-white/40 backdrop-blur-sm"
+                  className={`w-full px-4 py-4 bg-white/5 border text-white rounded-2xl focus:ring-2 focus:ring-purple-500 transition-all duration-300 hover:border-white/20 placeholder-white/40 backdrop-blur-sm ${
+                    formErrors.password ? 'border-red-400 ring-2 ring-red-400/30' : 'border-white/10'
+                  }`}
                   placeholder="Create a strong password"
                 />
+                {formErrors.password && (
+                  <p className="text-red-300 text-sm mt-2 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></span>
+                    {formErrors.password}
+                  </p>
+                )}
               </div>
 
               {/* Confirm Password - Only for Signup */}
@@ -292,18 +396,15 @@ export default function Login() {
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
-                    required={!isLogin}
                     className={`w-full px-4 py-4 bg-white/5 border text-white rounded-2xl focus:ring-2 focus:ring-purple-500 transition-all duration-300 hover:border-white/20 placeholder-white/40 backdrop-blur-sm ${
-                      formData.confirmPassword && formData.password !== formData.confirmPassword
-                        ? 'border-red-400 ring-2 ring-red-400/30'
-                        : 'border-white/10'
+                      formErrors.confirmPassword ? 'border-red-400 ring-2 ring-red-400/30' : 'border-white/10'
                     }`}
                     placeholder="Confirm your password"
                   />
-                  {formData.confirmPassword && formData.password !== formData.confirmPassword && (
+                  {formErrors.confirmPassword && (
                     <p className="text-red-300 text-sm mt-2 flex items-center gap-2">
                       <span className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></span>
-                      Passwords don't match
+                      {formErrors.confirmPassword}
                     </p>
                   )}
                 </div>
@@ -313,39 +414,45 @@ export default function Login() {
               <div className="space-y-4 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
                 {isLogin ? (
                   <div className="flex items-center justify-between">
-                    
                     <Link to="/404" className="text-sm text-cyan-300 hover:text-cyan-200 transition-colors duration-300 font-semibold">
                       Forgot password?
                     </Link>
                   </div>
                 ) : (
-                  <label className="flex items-start gap-3">
-                    <input
-                      type="checkbox"
-                      name="agreeToTerms"
-                      checked={formData.agreeToTerms}
-                      onChange={handleInputChange}
-                      required
-                      className="w-5 h-5 text-purple-500 bg-white/5 border-white/10 rounded focus:ring-purple-500 mt-0.5 flex-shrink-0"
-                    />
-                    <span className="text-sm text-white/70">
-                      I agree to the{" "}
-                      <Link to="/404" className="text-cyan-300 hover:text-cyan-200 transition-colors duration-300 font-semibold">
-                        Terms of Service
-                      </Link>{" "}
-                      and{" "}
-                      <Link to="/404" className="text-cyan-300 hover:text-cyan-200 transition-colors duration-300 font-semibold">
-                        Privacy Policy
-                      </Link>
-                    </span>
-                  </label>
+                  <div>
+                    <label className="flex items-start gap-3">
+                      <input
+                        type="checkbox"
+                        name="agreeToTerms"
+                        checked={formData.agreeToTerms}
+                        onChange={handleInputChange}
+                        className="w-5 h-5 text-purple-500 bg-white/5 border-white/10 rounded focus:ring-purple-500 mt-0.5 flex-shrink-0"
+                      />
+                      <span className="text-sm text-white/70">
+                        I agree to the{" "}
+                        <Link to="/404" className="text-cyan-300 hover:text-cyan-200 transition-colors duration-300 font-semibold">
+                          Terms of Service
+                        </Link>{" "}
+                        and{" "}
+                        <Link to="/404" className="text-cyan-300 hover:text-cyan-200 transition-colors duration-300 font-semibold">
+                          Privacy Policy
+                        </Link>
+                      </span>
+                    </label>
+                    {formErrors.agreeToTerms && (
+                      <p className="text-red-300 text-sm mt-2 flex items-center gap-2">
+                        <span className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></span>
+                        {formErrors.agreeToTerms}
+                      </p>
+                    )}
+                  </div>
                 )}
               </div>
 
               {/* Submit Button */}
               <button 
                 type="submit"
-                disabled={isLoading}
+                disabled={isLoading || !isFormValid()}
                 className={`w-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 hover:from-purple-600 hover:via-pink-600 hover:to-blue-600 text-white py-5 px-6 rounded-2xl font-black text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-3 animate-fade-in-up relative overflow-hidden group ${
                   isLoading ? 'animate-pulse' : ''
                 }`}

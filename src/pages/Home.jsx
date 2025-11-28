@@ -433,7 +433,7 @@ const Home = () => {
               >
                 {currentService && (
                   <motion.div 
-                    className="bg-gradient-to-br from-white to-gray-50 rounded-lg sm:rounded-xl lg:rounded-2xl p-4 min-[320px]:p-5 lg:p-8 shadow-xl border border-gray-100"
+                    className="bg-gradient-to-br  mb-2 from-white to-gray-50 rounded-lg sm:rounded-xl lg:rounded-2xl p-4 min-[320px]:p-5 lg:p-8 shadow-xl border border-gray-100"
                     whileHover={{ y: -5 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
@@ -504,7 +504,7 @@ const Home = () => {
       </section>
 
       {/* Features Section - Mobile Optimized */}
-      <section className="py-8 min-[320px]:py-10 sm:py-12 lg:py-20 bg-gray-50">
+      <section className="py-8 min-[320px]:py-10  mt-9 sm:py-12 lg:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-3 min-[320px]:px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
