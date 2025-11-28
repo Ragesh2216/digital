@@ -63,9 +63,9 @@ const Contact = () => {
         else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) errors.email = 'Please enter a valid email address';
         break;
       case 'phone':
-         if (!value.trim()) errors.phone = 'Phone number is required';
-      else if (!/^\d{10}$/.test(value.replace(/\D/g, ''))) errors.phone = 'Phone number must be exactly 10 digits';
-      break;
+        if (!value.trim()) errors.phone = 'Phone number is required';
+        else if (!/^\d{10}$/.test(value.replace(/\D/g, ''))) errors.phone = 'Phone number must be exactly 10 digits';
+        break;
       case 'objective':
         if (!value) errors.objective = 'Please select your primary objective';
         break;
@@ -107,6 +107,13 @@ const Contact = () => {
       [name]: true
     }));
     
+    let processedValue = value;
+    
+    // Auto-format phone number to remove non-digits and limit to 10 digits
+    if (name === 'phone') {
+      processedValue = value.replace(/\D/g, '').slice(0, 10);
+    }
+    
     if (type === 'checkbox') {
       const newServices = checked 
         ? [...formData.services, value]
@@ -120,7 +127,7 @@ const Contact = () => {
     } else {
       setFormData(prev => ({
         ...prev,
-        [name]: value
+        [name]: processedValue
       }));
     }
   };
@@ -383,72 +390,99 @@ const Contact = () => {
 
         {/* Form Container */}
         <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl p-4 sm:p-6 lg:p-8 transform transition-all duration-500 animate-fade-in-up">
-  {/* Step 1: Basic Info */}
-  {currentStep === 1 && (
-    <div className="animate-fade-in-up">
-      <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 flex items-center gap-2">
-        <span className="text-2xl">👤</span>
-        Tell Us About Yourself
-      </h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-        {[
-          { label: "Full Name *", name: "name", type: "text", placeholder: "Your full name", required: true },
-          { label: "Company *", name: "company", type: "text", placeholder: "Your company", required: true },
-          { label: "Email *", name: "email", type: "email", placeholder: "your.email@company.com", required: true },
-          { 
-            label: "Phone *", 
-            name: "phone", 
-            type: "tel", 
-            placeholder: "1234567890", 
-            required: true,
-            pattern: "[0-9]{10}",
-            title: "Please enter exactly 10 digits"
-          }
-        ].map((field, index) => (
-          <div key={index} className="animate-fade-in-up" style={{ animationDelay: `${index * 100}ms` }}>
-            <label className="block text-sm font-medium text-gray-700 mb-2">{field.label}</label>
-            <input
-              type={field.type}
-              name={field.name}
-              value={formData[field.name]}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              className={`w-full px-3 sm:px-4 py-2 sm:py-3 border rounded-lg sm:rounded-xl focus:ring-2 focus:border-transparent transition-all duration-300 ${
-                formErrors[field.name] && touchedFields[field.name]
-                  ? 'border-red-500 focus:ring-red-500 bg-red-50' 
-                  : formData[field.name] && !formErrors[field.name] && touchedFields[field.name]
-                  ? 'border-green-500 focus:ring-green-500 bg-green-50'
-                  : 'border-gray-300 focus:ring-purple-500 hover:border-purple-300'
-              }`}
-              placeholder={field.placeholder}
-              required={field.required}
-              pattern={field.pattern}
-              title={field.title}
-              maxLength={10}
-            />
-            {formErrors[field.name] && touchedFields[field.name] && (
-              <p className="mt-1 text-xs text-red-600 flex items-center gap-1">
-                <span>⚠️</span>
-                {formErrors[field.name]}
-              </p>
-            )}
-            {formData[field.name] && !formErrors[field.name] && touchedFields[field.name] && (
-              <p className="mt-1 text-xs text-green-600 flex items-center gap-1">
-                <span>✅</span>
-                {field.name === 'phone' ? 'Valid 10-digit number!' : 'Looks good!'}
-              </p>
-            )}
-            {field.name === 'phone' && (
-              <p className="mt-1 text-xs text-gray-500">
-                Enter 10 digits without spaces or special characters
-              </p>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
-  )}
-          
+          {/* Step 1: Basic Info */}
+          {currentStep === 1 && (
+            <div className="animate-fade-in-up">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 flex items-center gap-2">
+                <span className="text-2xl">👤</span>
+                Tell Us About Yourself
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                {[
+                  { 
+                    label: "Full Name *", 
+                    name: "name", 
+                    type: "text", 
+                    placeholder: "Your full name", 
+                    required: true 
+                  },
+                  { 
+                    label: "Company *", 
+                    name: "company", 
+                    type: "text", 
+                    placeholder: "Your company", 
+                    required: true 
+                  },
+                  { 
+                    label: "Email *", 
+                    name: "email", 
+                    type: "email", 
+                    placeholder: "your.email@example.com", 
+                    required: true
+                  },
+                  { 
+                    label: "Phone *", 
+                    name: "phone", 
+                    type: "tel", 
+                    placeholder: "1234567890", 
+                    required: true,
+                    pattern: "[0-9]{10}",
+                    title: "Please enter exactly 10 digits"
+                  }
+                ].map((field, index) => (
+                  <div key={index} className="animate-fade-in-up" style={{ animationDelay: `${index * 100}ms` }}>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{field.label}</label>
+                    <input
+                      type={field.type}
+                      name={field.name}
+                      value={formData[field.name]}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      className={`w-full px-3 sm:px-4 py-2 sm:py-3 border rounded-lg sm:rounded-xl focus:ring-2 focus:border-transparent transition-all duration-300 ${
+                        formErrors[field.name] && touchedFields[field.name]
+                          ? 'border-red-500 focus:ring-red-500 bg-red-50' 
+                          : formData[field.name] && !formErrors[field.name] && touchedFields[field.name]
+                          ? 'border-green-500 focus:ring-green-500 bg-green-50'
+                          : 'border-gray-300 focus:ring-purple-500 hover:border-purple-300'
+                      }`}
+                      placeholder={field.placeholder}
+                      required={field.required}
+                      pattern={field.pattern}
+                      title={field.title}
+                      maxLength={field.name === 'phone' ? 10 : undefined}
+                    />
+                    {formErrors[field.name] && touchedFields[field.name] && (
+                      <p className="mt-1 text-xs text-red-600 flex items-center gap-1">
+                        <span>⚠️</span>
+                        {formErrors[field.name]}
+                      </p>
+                    )}
+                    {formData[field.name] && !formErrors[field.name] && touchedFields[field.name] && (
+                      <p className="mt-1 text-xs text-green-600 flex items-center gap-1">
+                        <span>✅</span>
+                        {field.name === 'phone' 
+                          ? 'Valid 10-digit number!' 
+                          : field.name === 'email'
+                          ? 'Valid email address!'
+                          : 'Looks good!'
+                        }
+                      </p>
+                    )}
+                    {field.name === 'phone' && (
+                      <p className="mt-1 text-xs text-gray-500">
+                        Enter 10 digits without spaces or special characters
+                      </p>
+                    )}
+                    {field.name === 'email' && (
+                      <p className="mt-1 text-xs text-gray-500">
+                        We accept all valid email addresses of any length
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Step 2: Business Goals */}
           {currentStep === 2 && (
