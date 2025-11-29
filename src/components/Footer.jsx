@@ -48,10 +48,10 @@ const Footer = () => {
 
           <div className="flex justify-center md:justify-start space-x-3">
             {[
-              { icon: <FacebookIcon className="hover:text-pink-400 transition-colors duration-200" />, url: "#", color: "hover:bg-yellow-500" },
-              { icon: <InstagramIcon className="hover:text-bule-500 transition-colors duration-200" />, url: "#", color: "hover:bg-red-500" },
-             { icon: <LinkedInIcon className="hover:text-green-600 transition-colors duration-200" />, url: "#", color: "hover:bg-pink-600" },
-              { icon: <YouTubeIcon className="hover:text-yellow-600 transition-colors duration-200" />, url: "#", color: "hover:bg-green-600" }
+              { icon: <FacebookIcon className="hover:text-pink-400 transition-colors duration-200" />, url: "/404", color: "hover:bg-yellow-500" },
+              { icon: <InstagramIcon className="hover:text-bule-500 transition-colors duration-200" />, url: "/404", color: "hover:bg-red-500" },
+             { icon: <LinkedInIcon className="hover:text-green-600 transition-colors duration-200" />, url: "/404", color: "hover:bg-pink-600" },
+              { icon: <YouTubeIcon className="hover:text-yellow-600 transition-colors duration-200" />, url: "/404", color: "hover:bg-green-600" }
             ].map((social, index) => (
               <a
                 key={index}
