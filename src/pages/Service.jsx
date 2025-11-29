@@ -209,9 +209,11 @@ export default function DigitalMarketingService() {
             <span>🚀</span>
             Transforming Brands Digitally
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent animate-gradient">
-            Digital Marketing Excellence
-          </h1>
+         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-gradient">
+  <span className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent inline-block pb-1">
+    Digital Marketing Excellence
+  </span>
+</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Data-driven marketing strategies that deliver measurable results. From SEO to social media, 
             we create campaigns that drive growth, engagement, and revenue for your business.

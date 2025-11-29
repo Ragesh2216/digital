@@ -182,11 +182,11 @@ const About = () => {
       <main className="pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
         {/* Header Section */}
         <section className="text-center mb-16">
-          <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent mb-6 transition-all duration-1000 ${
-            isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'
-          }`}>
-            About Digital Growth Solutions
-          </h1>
+      <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 bg-clip-text text-transparent mb-6 transition-all duration-1000 leading-tight pb-1 ${
+  isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'
+}`}>
+  About Digital Growth Solutions
+</h1>
           <p className={`text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed transition-all duration-1000 delay-300 ${
             isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-8'
           }`}>

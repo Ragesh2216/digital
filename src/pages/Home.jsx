@@ -272,78 +272,84 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 pt-16">
       {/* Hero Section - Mobile Optimized */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-blue-900 via-purple-900 to-indigo-900 text-white py-8 min-[320px]:py-10 sm:py-12 lg:py-20">
-        <div className="absolute inset-0 bg-black opacity-40"></div>
-        
-        {/* Animated Background Elements */}
-        <div className="absolute top-0 left-0 w-full h-full">
-          <motion.div
-            animate={{
-              y: [0, -10, 0],
-              x: [0, 5, 0],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="absolute top-4 left-4 w-8 h-8 min-[320px]:w-10 min-[320px]:h-10 sm:w-12 sm:h-12 lg:w-20 lg:h-20 bg-blue-500 rounded-full opacity-20"
-          ></motion.div>
-          <motion.div
-            animate={{
-              y: [0, 8, 0],
-              x: [0, -8, 0],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="absolute top-20 right-4 min-[320px]:right-6 sm:right-10 lg:right-20 w-6 h-6 min-[320px]:w-8 min-[320px]:h-8 sm:w-10 sm:h-10 lg:w-16 lg:h-16 bg-purple-500 rounded-full opacity-20"
-          ></motion.div>
-        </div>
-        
-        <div className="relative max-w-7xl mx-auto px-3 min-[320px]:px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+<section className="relative overflow-hidden bg-gradient-to-r from-blue-900 via-purple-900 to-indigo-900 text-white py-8 min-[320px]:py-10 sm:py-12 lg:py-20">
+  <div className="absolute inset-0 bg-black opacity-40"></div>
+  
+  {/* Animated Background Elements */}
+  <div className="absolute top-0 left-0 w-full h-full">
+    <motion.div
+      animate={{
+        y: [0, -10, 0],
+        x: [0, 5, 0],
+      }}
+      transition={{
+        duration: 6,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }}
+      className="absolute top-4 left-4 w-8 h-8 min-[320px]:w-10 min-[320px]:h-10 sm:w-12 sm:h-12 lg:w-20 lg:h-20 bg-blue-500 rounded-full opacity-20"
+    ></motion.div>
+    <motion.div
+      animate={{
+        y: [0, 8, 0],
+        x: [0, -8, 0],
+      }}
+      transition={{
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }}
+      className="absolute top-20 right-4 min-[320px]:right-6 sm:right-10 lg:right-20 w-6 h-6 min-[320px]:w-8 min-[320px]:h-8 sm:w-10 sm:h-10 lg:w-16 lg:h-16 bg-purple-500 rounded-full opacity-20"
+    ></motion.div>
+  </div>
+  
+  <div className="relative max-w-7xl mx-auto px-3 min-[320px]:px-4 sm:px-6 lg:px-8 text-center">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+    >
+      {/* Fixed Heading - No Text Clipping */}
+<h1 className="text-2xl min-[375px]:text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 lg:mb-8 px-4">
+  <span className="text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text inline-block leading-relaxed">
+    Comprehensive Digital Marketing
+  </span>
+</h1>
+      
+      <p className="text-sm min-[320px]:text-base sm:text-lg lg:text-xl text-gray-300 max-w-xs min-[320px]:max-w-sm sm:max-w-md lg:max-w-3xl mx-auto px-2 min-[320px]:px-4 leading-relaxed mb-6 sm:mb-8">
+        End-to-end digital marketing solutions that drive growth, increase revenue, and build lasting customer relationships.
+      </p>
+      
+      <div className="flex flex-col min-[320px]:flex-row gap-2 min-[320px]:gap-3 sm:gap-4 justify-center items-center px-2">
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="w-full min-[320px]:w-auto"
+        >
+          <Link 
+            to="/contact"
+            className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-4 min-[320px]:px-5 sm:px-6 lg:px-8 py-2 min-[320px]:py-2.5 sm:py-3 lg:py-4 rounded-lg sm:rounded-xl font-semibold text-sm min-[320px]:text-base sm:text-lg transition-all duration-300 shadow-lg sm:shadow-2xl w-full text-center"
           >
-            <h1 className="text-2xl min-[320px]:text-2xl min-[375px]:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 min-[320px]:mb-8 lg:mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent leading-tight">
-              Comprehensive Digital Marketing
-            </h1>
-            <p className="text-sm min-[320px]:text-base sm:text-lg lg:text-xl mb-4 min-[320px]:mb-5 lg:mb-8 text-gray-300 max-w-xs min-[320px]:max-w-sm sm:max-w-md lg:max-w-3xl mx-auto px-2 min-[320px]:px-4 leading-relaxed">
-              End-to-end digital marketing solutions that drive growth, increase revenue, and build lasting customer relationships.
-            </p>
-            <div className="flex flex-col min-[320px]:flex-row gap-2 min-[320px]:gap-3 sm:gap-4 justify-center items-center px-2">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full min-[320px]:w-auto"
-              >
-                <Link 
-                  to="/contact"
-                  className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-4 min-[320px]:px-5 sm:px-6 lg:px-8 py-2 min-[320px]:py-2.5 sm:py-3 lg:py-4 rounded-lg sm:rounded-xl font-semibold text-sm min-[320px]:text-base sm:text-lg transition-all duration-300 shadow-lg sm:shadow-2xl w-full text-center"
-                >
-                  Get Free Marketing Audit
-                </Link>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full min-[320px]:w-auto"
-              >
-                <Link 
-                  to="/case-studies"
-                  className="inline-block border border-white min-[320px]:border-2 text-white px-4 min-[320px]:px-5 sm:px-6 lg:px-8 py-2 min-[320px]:py-2.5 sm:py-3 lg:py-4 rounded-lg sm:rounded-xl font-semibold text-sm min-[320px]:text-base sm:text-lg hover:bg-white hover:text-gray-900 transition-all duration-300 w-full text-center"
-                >
-                  <PlayArrow className="mr-1 min-[320px]:mr-2 inline-block text-sm" />
-                  View Case Studies
-                </Link>
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
+            Get Free Marketing Audit
+          </Link>
+        </motion.div>
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="w-full min-[320px]:w-auto"
+        >
+          <Link 
+            to="/case-studies"
+            className="inline-block border border-white min-[320px]:border-2 text-white px-4 min-[320px]:px-5 sm:px-6 lg:px-8 py-2 min-[320px]:py-2.5 sm:py-3 lg:py-4 rounded-lg sm:rounded-xl font-semibold text-sm min-[320px]:text-base sm:text-lg hover:bg-white hover:text-gray-900 transition-all duration-300 w-full text-center"
+          >
+            <PlayArrow className="mr-1 min-[320px]:mr-2 inline-block text-sm" />
+            View Case Studies
+          </Link>
+        </motion.div>
+      </div>
+    </motion.div>
+  </div>
+
 
         {/* Animated Marketing Metrics Preview */}
         <motion.div

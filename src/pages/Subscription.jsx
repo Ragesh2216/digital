@@ -290,55 +290,59 @@ const CheckoutPage = ({ planId, onBack, onComplete }) => {
 
 const SubscriptionView = ({ handleSubscription }) => (
     <div className="max-w-7xl mx-auto pt-10 pb-20">
-        
-        {/* Modern Header Section */}
-        <div className="text-center mt-8 mb-16 animate-fade-in-up">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 tracking-tight bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-            Digital Marketing Plans
-          </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed animate-fade-in-up delay-300">
-            Transform your digital presence with data-driven marketing strategies. From social media to AI-powered campaigns, we have the perfect plan to grow your business.
-          </p>
-          
-          {/* Marketing Stats */}
-          <div className="grid grid-cols-3 gap-8 mt-12 max-w-2xl mx-auto">
-            {[
-              { number: '3.2x', label: 'Average ROI' },
-              { number: '24/7', label: 'Campaign Monitoring' },
-              { number: '500+', label: 'Clients Transformed' }
-            ].map((stat, index) => (
-              <div key={index} className="text-center animate-fade-in-up" style={{ animationDelay: `${500 + index * 200}ms` }}>
-                <div className="text-2xl font-bold text-purple-600 mb-1">{stat.number}</div>
-                <div className="text-sm text-gray-500">{stat.label}</div>
-              </div>
-            ))}
-          </div>
+  
+  {/* Modern Header Section */}
+  <div className="text-center mt-8 mb-16 animate-fade-in-up">
+    {/* Fixed Heading - Remove bg-clip-text issue */}
+    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 tracking-tight leading-tight px-4">
+  <span className="text-transparent bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text pb-1 inline-block">
+    Digital Marketing Plans
+  </span>
+</h1>
+    
+    <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed animate-fade-in-up delay-300 px-4 mb-8">
+      Transform your digital presence with data-driven marketing strategies. From social media to AI-powered campaigns, we have the perfect plan to grow your business.
+    </p>
+    
+    {/* Marketing Stats */}
+    <div className="grid grid-cols-3 gap-8 mt-12 max-w-2xl mx-auto px-4">
+      {[
+        { number: '3.2x', label: 'Average ROI' },
+        { number: '24/7', label: 'Campaign Monitoring' },
+        { number: '500+', label: 'Clients Transformed' }
+      ].map((stat, index) => (
+        <div key={index} className="text-center animate-fade-in-up" style={{ animationDelay: `${500 + index * 200}ms` }}>
+          <div className="text-2xl font-bold text-purple-600 mb-1">{stat.number}</div>
+          <div className="text-sm text-gray-500">{stat.label}</div>
         </div>
-
-        {/* Pricing Grid with modern design */}
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-10">
-          {marketingTiers.map((plan, index) => (
-            <PlanCard 
-              key={plan.id} 
-              plan={plan} 
-              onSelect={handleSubscription}
-              delay={300 + index * 200}
-            />
-          ))}
-        </div>
-        
-        {/* Custom Solutions CTA */}
-        <div className="mt-16 bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-8 text-center animate-fade-in delay-1000 border border-purple-100">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">Need Custom Marketing Solutions?</h3>
-          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-            We create bespoke marketing strategies for unique business challenges. 
-            Get a custom plan with dedicated marketing experts and advanced analytics.
-          </p>
-          <Link to="/contact" className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105">
-            Talk to Marketing Experts
-          </Link>
-        </div>
+      ))}
     </div>
+  </div>
+
+  {/* Pricing Grid with modern design */}
+  <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-10 px-4 sm:px-6">
+    {marketingTiers.map((plan, index) => (
+      <PlanCard 
+        key={plan.id} 
+        plan={plan} 
+        onSelect={handleSubscription}
+        delay={300 + index * 200}
+      />
+    ))}
+  </div>
+  
+  {/* Custom Solutions CTA */}
+  <div className="mt-16 bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-8 text-center animate-fade-in delay-1000 border border-purple-100 mx-4 sm:mx-6">
+    <h3 className="text-2xl font-bold text-gray-900 mb-4">Need Custom Marketing Solutions?</h3>
+    <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+      We create bespoke marketing strategies for unique business challenges. 
+      Get a custom plan with dedicated marketing experts and advanced analytics.
+    </p>
+    <Link to="/contact" className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105">
+      Talk to Marketing Experts
+    </Link>
+  </div>
+</div>
 );
 
 // Main Component
