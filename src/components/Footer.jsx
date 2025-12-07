@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Import Link
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -46,20 +47,39 @@ const Footer = () => {
             data-driven campaigns, and measurable results. We transform brands in the digital landscape.
           </p>
 
+          {/* Social Icons - Linked to 404 */}
           <div className="flex justify-center md:justify-start space-x-3">
             {[
-              { icon: <FacebookIcon className="hover:text-pink-400 transition-colors duration-200" />, url: "/404", color: "hover:bg-yellow-500" },
-              { icon: <InstagramIcon className="hover:text-bule-500 transition-colors duration-200" />, url: "/404", color: "hover:bg-red-500" },
-             { icon: <LinkedInIcon className="hover:text-green-600 transition-colors duration-200" />, url: "/404", color: "hover:bg-pink-600" },
-              { icon: <YouTubeIcon className="hover:text-yellow-600 transition-colors duration-200" />, url: "/404", color: "hover:bg-green-600" }
+              { 
+                icon: <FacebookIcon className="hover:text-pink-400 transition-colors duration-200" />, 
+                label: "Facebook",
+                color: "hover:bg-yellow-500" 
+              },
+              { 
+                icon: <InstagramIcon className="hover:text-blue-500 transition-colors duration-200" />, 
+                label: "Instagram",
+                color: "hover:bg-red-500" 
+              },
+              { 
+                icon: <LinkedInIcon className="hover:text-green-600 transition-colors duration-200" />, 
+                label: "LinkedIn",
+                color: "hover:bg-pink-600" 
+              },
+              { 
+                icon: <YouTubeIcon className="hover:text-yellow-600 transition-colors duration-200" />, 
+                label: "YouTube",
+                color: "hover:bg-green-600" 
+              }
             ].map((social, index) => (
-              <a
+              <Link
                 key={index}
-                href={social.url}
+                to="/404"
                 className={`w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:scale-110 transition-all duration-300 ${social.color}`}
+                aria-label={social.label}
+                title={social.label}
               >
                 {social.icon}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -71,19 +91,18 @@ const Footer = () => {
           </h5>
           <ul className="space-y-3">
             {[
-              { label: "SEO Optimization", url: "/seo" },
-              { label: "PPC Advertising", url: "/ppc" },
-              { label: "Social Media Marketing", url: "/social-media" },
-              { label: "Content Marketing", url: "/content" },
-              
+              { label: "SEO Optimization", url: "/404" },
+              { label: "PPC Advertising", url: "/404" },
+              { label: "Social Media Marketing", url: "/404" },
+              { label: "Content Marketing", url: "/404" }
             ].map((service, index) => (
               <li key={index}>
-                <a 
-                  href={service.url} 
+                <Link 
+                  to={service.url} 
                   className="text-gray-400 hover:text-purple-400 transition-all duration-300 text-sm font-normal block py-1 hover:translate-x-2"
                 >
                   {service.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -99,16 +118,15 @@ const Footer = () => {
               { label: "Home", url: "/" },
               { label: "About Us", url: "/about" },
               { label: "Services", url: "/services" },
-              
               { label: "Contact", url: "/contact" }
             ].map((link, index) => (
               <li key={index}>
-                <a 
-                  href={link.url} 
+                <Link 
+                  to={link.url} 
                   className="text-gray-400 hover:text-purple-400 transition-all duration-300 text-sm font-normal block py-1 hover:translate-x-2"
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -129,30 +147,27 @@ const Footer = () => {
             </div>
             
             <div className="flex justify-center md:justify-start">
-              <a
-                href="https://www.google.com/maps/search/?api=1&query=MMR+COMPLEX,+Salem,+Tamil+Nadu+636008"
-                target="_blank"
-                rel="noreferrer"
+              <Link
+                to="/404"
                 className="text-green-400 hover:text-green-300 underline text-sm"
               >
                 View on Google Maps
-              </a>
+              </Link>
             </div>
+            
             <div className="flex justify-center md:justify-start items-center space-x-3 group">
               <PhoneIcon className="w-5 h-5 text-purple-400 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
-              <a href="tel:+919876543210" className="text-sm text-gray-400 hover:text-purple-400 transition-all duration-300">
+              <Link to="/404" className="text-sm text-gray-400 hover:text-purple-400 transition-all duration-300">
                 +91 98765 43210
-              </a>
+              </Link>
             </div>
             
             <div className="flex justify-center md:justify-start items-center space-x-3 group">
               <EmailIcon className="w-5 h-5 text-purple-400 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
-              <a href="mailto:hello@digigrow.com" className="text-sm text-gray-400 hover:text-purple-400 transition-all duration-300">
+              <Link to="/404" className="text-sm text-gray-400 hover:text-purple-400 transition-all duration-300">
                 hello@stackly.com
-              </a>
+              </Link>
             </div>
-
-            
           </div>
         </div>
       </div>
@@ -170,25 +185,25 @@ const Footer = () => {
           {/* Legal Links */}
           <div className="flex flex-wrap justify-center md:justify-end space-x-6 text-sm">
             {[
-              { label: "Privacy Policy", url: "/privacy" },
-              { label: "Terms of Service", url: "/terms" },
-              { label: "Cookie Policy", url: "/cookies" },
-              { label: "GDPR Compliance", url: "/gdpr" }
+              { label: "Privacy Policy", url: "/404" },
+              { label: "Terms of Service", url: "/404" },
+              { label: "Cookie Policy", url: "/404" },
+              { label: "GDPR Compliance", url: "/404" }
             ].map((link, index) => (
-              <a
+              <Link
                 key={index}
-                href={link.url}
+                to={link.url}
                 className="text-gray-400 hover:text-purple-400 transition-colors duration-300 hover:underline"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
         </div>
 
         {/* Additional Info */}
         <div className="mt-6 pt-6 border-t border-purple-700/30 text-center">
-          <p className="text-xs text-black-500">
+          <p className="text-xs text-gray-500">
             stackly - Driving digital transformation through innovative marketing strategies. 
             Google Premier Partner • Meta Business Partner • Certified Marketing Professionals
           </p>
@@ -228,8 +243,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-
-     
     </footer>
   );
 };

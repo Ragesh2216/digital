@@ -38,7 +38,7 @@ const Home = () => {
     {
       id: 'seo',
       name: 'SEO',
-      icon: <Search className="text-2xl min-[320px]:text-2xl sm:text-3xl lg:text-4xl" />,
+      icon: <Search className="text-lg min-[375px]:text-xl sm:text-2xl md:text-3xl" />,
       description: 'Dominate search rankings with comprehensive optimization strategies',
       features: [
         'Technical SEO Audit',
@@ -54,7 +54,7 @@ const Home = () => {
     {
       id: 'ppc',
       name: 'PPC Advertising',
-      icon: <BarChart className="text-2xl min-[320px]:text-2xl sm:text-3xl lg:text-4xl" />,
+      icon: <BarChart className="text-lg min-[375px]:text-xl sm:text-2xl md:text-3xl" />,
       description: 'Drive immediate results with data-driven paid advertising campaigns',
       features: [
         'Google Ads Management',
@@ -70,7 +70,7 @@ const Home = () => {
     {
       id: 'social',
       name: 'Social Media Marketing',
-      icon: <Groups className="text-2xl min-[320px]:text-2xl sm:text-3xl lg:text-4xl" />,
+      icon: <Groups className="text-lg min-[375px]:text-xl sm:text-2xl md:text-3xl" />,
       description: 'Build brand awareness and engagement across social platforms',
       features: [
         'Content Strategy',
@@ -86,7 +86,7 @@ const Home = () => {
     {
       id: 'content',
       name: 'Content Marketing',
-      icon: <DesignServices className="text-2xl min-[320px]:text-2xl sm:text-3xl lg:text-4xl" />,
+      icon: <DesignServices className="text-lg min-[375px]:text-xl sm:text-2xl md:text-3xl" />,
       description: 'Create valuable content that attracts and converts your audience',
       features: [
         'Content Strategy',
@@ -102,7 +102,7 @@ const Home = () => {
     {
       id: 'email',
       name: 'Email Marketing',
-      icon: <Email className="text-2xl min-[320px]:text-2xl sm:text-3xl lg:text-4xl" />,
+      icon: <Email className="text-lg min-[375px]:text-xl sm:text-2xl md:text-3xl" />,
       description: 'Nurture leads and drive conversions with personalized email campaigns',
       features: [
         'Email Strategy Development',
@@ -118,7 +118,7 @@ const Home = () => {
     {
       id: 'mobile',
       name: 'Mobile Marketing',
-      icon: <Smartphone className="text-2xl min-[320px]:text-2xl sm:text-3xl lg:text-4xl" />,
+      icon: <Smartphone className="text-lg min-[375px]:text-xl sm:text-2xl md:text-3xl" />,
       description: 'Reach customers on their mobile devices with optimized campaigns',
       features: [
         'Mobile-First Design',
@@ -135,28 +135,28 @@ const Home = () => {
 
   const marketingFeatures = [
     {
-      icon: <AutoGraph className="text-2xl min-[320px]:text-2xl sm:text-3xl lg:text-4xl" />,
+      icon: <AutoGraph className="text-lg min-[375px]:text-xl sm:text-2xl md:text-3xl" />,
       title: "Data-Driven Strategy",
       description: "AI-powered insights and analytics to optimize your marketing performance",
       color: "from-purple-500 to-pink-500",
       delay: 0
     },
     {
-      icon: <Analytics className="text-2xl min-[320px]:text-2xl sm:text-3xl lg:text-4xl" />,
+      icon: <Analytics className="text-lg min-[375px]:text-xl sm:text-2xl md:text-3xl" />,
       title: "ROI-Focused Approach",
       description: "Every campaign is designed to deliver measurable business results",
       color: "from-blue-500 to-cyan-500",
       delay: 100
     },
     {
-      icon: <Speed className="text-2xl min-[320px]:text-2xl sm:text-3xl lg:text-4xl" />,
+      icon: <Speed className="text-lg min-[375px]:text-xl sm:text-2xl md:text-3xl" />,
       title: "Rapid Implementation",
       description: "Quick campaign setup with continuous optimization for maximum impact",
       color: "from-green-500 to-emerald-500",
       delay: 200
     },
     {
-      icon: <Security className="text-2xl min-[320px]:text-2xl sm:text-3xl lg:text-4xl" />,
+      icon: <Security className="text-lg min-[375px]:text-xl sm:text-2xl md:text-3xl" />,
       title: "Transparent Reporting",
       description: "Clear, comprehensive reporting with actionable insights",
       color: "from-orange-500 to-red-500",
@@ -271,543 +271,411 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 pt-16">
-      {/* Hero Section - Mobile Optimized */}
-<section className="relative overflow-hidden bg-gradient-to-r from-blue-900 via-purple-900 to-indigo-900 text-white py-8 min-[320px]:py-10 sm:py-12 lg:py-20">
-  <div className="absolute inset-0 bg-black opacity-40"></div>
-  
-  {/* Animated Background Elements */}
-  <div className="absolute top-0 left-0 w-full h-full">
-    <motion.div
-      animate={{
-        y: [0, -10, 0],
-        x: [0, 5, 0],
-      }}
-      transition={{
-        duration: 6,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }}
-      className="absolute top-4 left-4 w-8 h-8 min-[320px]:w-10 min-[320px]:h-10 sm:w-12 sm:h-12 lg:w-20 lg:h-20 bg-blue-500 rounded-full opacity-20"
-    ></motion.div>
-    <motion.div
-      animate={{
-        y: [0, 8, 0],
-        x: [0, -8, 0],
-      }}
-      transition={{
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }}
-      className="absolute top-20 right-4 min-[320px]:right-6 sm:right-10 lg:right-20 w-6 h-6 min-[320px]:w-8 min-[320px]:h-8 sm:w-10 sm:h-10 lg:w-16 lg:h-16 bg-purple-500 rounded-full opacity-20"
-    ></motion.div>
-  </div>
-  
-  <div className="relative max-w-7xl mx-auto px-3 min-[320px]:px-4 sm:px-6 lg:px-8 text-center">
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-    >
-      {/* Fixed Heading - No Text Clipping */}
-<h1 className="text-2xl min-[375px]:text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 lg:mb-8 px-4">
-  <span className="text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text inline-block leading-relaxed">
-    Comprehensive Digital Marketing
-  </span>
-</h1>
-      
-      <p className="text-sm min-[320px]:text-base sm:text-lg lg:text-xl text-gray-300 max-w-xs min-[320px]:max-w-sm sm:max-w-md lg:max-w-3xl mx-auto px-2 min-[320px]:px-4 leading-relaxed mb-6 sm:mb-8">
-        End-to-end digital marketing solutions that drive growth, increase revenue, and build lasting customer relationships.
-      </p>
-      
-      <div className="flex flex-col min-[320px]:flex-row gap-2 min-[320px]:gap-3 sm:gap-4 justify-center items-center px-2">
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="w-full min-[320px]:w-auto"
-        >
-          <Link 
-            to="/contact"
-            className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-4 min-[320px]:px-5 sm:px-6 lg:px-8 py-2 min-[320px]:py-2.5 sm:py-3 lg:py-4 rounded-lg sm:rounded-xl font-semibold text-sm min-[320px]:text-base sm:text-lg transition-all duration-300 shadow-lg sm:shadow-2xl w-full text-center"
-          >
-            Get Free Marketing Audit
-          </Link>
-        </motion.div>
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="w-full min-[320px]:w-auto"
-        >
-          <Link 
-            to="/case-studies"
-            className="inline-block border border-white min-[320px]:border-2 text-white px-4 min-[320px]:px-5 sm:px-6 lg:px-8 py-2 min-[320px]:py-2.5 sm:py-3 lg:py-4 rounded-lg sm:rounded-xl font-semibold text-sm min-[320px]:text-base sm:text-lg hover:bg-white hover:text-gray-900 transition-all duration-300 w-full text-center"
-          >
-            <PlayArrow className="mr-1 min-[320px]:mr-2 inline-block text-sm" />
-            View Case Studies
-          </Link>
-        </motion.div>
-      </div>
-    </motion.div>
-  </div>
-
-
-        {/* Animated Marketing Metrics Preview */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="relative max-w-xs min-[320px]:max-w-sm sm:max-w-md lg:max-w-4xl mx-auto mt-6 min-[320px]:mt-7 sm:mt-8 lg:mt-12 px-3 min-[320px]:px-4"
-        >
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg sm:rounded-xl lg:rounded-2xl p-3 min-[320px]:p-4 lg:p-6 border border-white/20">
-            <div className="flex flex-col min-[320px]:flex-row items-center justify-between mb-3 min-[320px]:mb-4 gap-1 min-[320px]:gap-2">
-              <div className="text-white font-semibold text-sm min-[320px]:text-base sm:text-lg">Marketing Performance Dashboard</div>
-              <div className="text-blue-300 text-xs min-[320px]:text-sm">Live Preview</div>
-            </div>
-            <div className="h-16 min-[320px]:h-18 sm:h-20 lg:h-32 bg-black/20 rounded-lg p-2 min-[320px]:p-3 lg:p-4">
-              <div className="flex items-end justify-between h-full space-x-1 lg:space-x-2">
-                {[20, 35, 50, 65, 80, 95, 120, 145, 170, 200, 230, 245].map((height, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ height: 0 }}
-                    animate={{ height: `${Math.min(height, 100)}%` }}
-                    transition={{ duration: 1, delay: index * 0.1 }}
-                    className={`w-2 min-[320px]:w-2.5 sm:w-3 lg:w-4 xl:w-8 rounded-t ${
-                      height > 180 ? 'bg-green-400' : 
-                      height > 120 ? 'bg-blue-400' : 'bg-purple-400'
-                    }`}
-                  ></motion.div>
-                ))}
-              </div>
-            </div>
-            <div className="flex flex-col min-[320px]:flex-row justify-between text-xs text-gray-300 mt-1 min-[320px]:mt-2 gap-1">
-              <span className="text-xs">Month 1</span>
-              <span className="text-blue-300 text-xs">Accelerated Growth</span>
-              <span className="text-xs">Current</span>
-            </div>
-          </div>
-        </motion.div>
-
-        <div className="absolute bottom-0 left-0 w-full h-8 min-[320px]:h-10 sm:h-12 lg:h-20 bg-gradient-to-t from-blue-50 to-transparent"></div>
-      </section>
-
-      {/* Services Section - Mobile Optimized */}
-      <section className="py-8 min-[320px]:py-10 sm:py-12 lg:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-3 min-[320px]:px-4 sm:px-6 lg:px-8">
+      {/* Hero Section - Optimized for 320px */}
+      <section className="relative overflow-hidden bg-gradient-to-r from-blue-900 via-purple-900 to-indigo-900 text-white py-6 px-3 sm:py-8 sm:px-4 lg:py-12 lg:px-8">
+        <div className="absolute inset-0 bg-black opacity-40"></div>
+        
+        {/* Simplified Background Elements */}
+        <div className="absolute top-0 left-0 w-full h-full">
+          <motion.div
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-4 left-4 w-6 h-6 sm:w-8 sm:h-8 lg:w-12 lg:h-12 bg-blue-500 rounded-full opacity-20"
+          ></motion.div>
+        </div>
+        
+        <div className="relative max-w-7xl mx-auto text-center px-2">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-6 min-[320px]:mb-8 lg:mb-16"
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
           >
-            <h2 className="text-xl min-[320px]:text-2xl min-[375px]:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 min-[320px]:mb-4 leading-tight">
-              Complete Digital Marketing Services
-            </h2>
-            <p className="text-sm min-[320px]:text-base sm:text-lg lg:text-xl text-gray-600 max-w-xs min-[320px]:max-w-sm sm:max-w-md lg:max-w-3xl mx-auto px-2 min-[320px]:px-4">
-              From SEO to social media, we offer comprehensive solutions to grow your business online.
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4 lg:mb-6 px-2">
+              <span className="text-transparent bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text inline-block">
+                Comprehensive Digital Marketing
+              </span>
+            </h1>
+            
+            <p className="text-xs sm:text-sm md:text-base lg:text-lg text-gray-300 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-2xl mx-auto px-1 mb-4 sm:mb-5 lg:mb-6 leading-relaxed">
+              End-to-end digital marketing solutions that drive growth, increase revenue, and build lasting customer relationships.
             </p>
+            
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center items-center px-1">
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="w-full sm:w-auto"
+              >
+                <Link 
+                  to="/contact"
+                  className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 rounded-lg font-semibold text-xs sm:text-sm md:text-base transition-all duration-300 shadow-md w-full text-center"
+                >
+                  Get Free Marketing Audit
+                </Link>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="w-full sm:w-auto"
+              >
+                <Link 
+                  to="/case-studies"
+                  className="inline-block border border-white text-white px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 rounded-lg font-semibold text-xs sm:text-sm md:text-base hover:bg-white hover:text-gray-900 transition-all duration-300 w-full text-center"
+                >
+                  <PlayArrow className="mr-1 sm:mr-2 inline-block" />
+                  View Case Studies
+                </Link>
+              </motion.div>
+            </div>
           </motion.div>
 
-          {/* Service Tabs */}
-          <div className="mb-12">
-            <div className="flex flex-wrap justify-center gap-2 min-[320px]:gap-3 sm:gap-4 mb-6 min-[320px]:mb-8">
+          {/* Simplified Dashboard Preview */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="mt-4 sm:mt-5 lg:mt-6 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto"
+          >
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-2 sm:p-3 border border-white/20">
+              <div className="text-white font-semibold text-xs sm:text-sm mb-2">Marketing Performance Dashboard</div>
+              <div className="h-12 sm:h-14 md:h-16 lg:h-20 bg-black/20 rounded-lg p-1 sm:p-2">
+                <div className="flex items-end justify-between h-full space-x-0.5 sm:space-x-1">
+                  {[20, 35, 50, 65, 80, 95, 120, 145, 170, 200, 230, 245].map((height, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ height: 0 }}
+                      animate={{ height: `${Math.min(height, 100)}%` }}
+                      transition={{ duration: 1, delay: index * 0.1 }}
+                      className={`w-1 sm:w-1.5 md:w-2 lg:w-2.5 rounded-t ${
+                        height > 180 ? 'bg-green-400' : 
+                        height > 120 ? 'bg-blue-400' : 'bg-purple-400'
+                      }`}
+                    ></motion.div>
+                  ))}
+                </div>
+              </div>
+              <div className="flex justify-between text-xs text-gray-300 mt-1">
+                <span className="text-[10px] sm:text-xs">Month 1</span>
+                <span className="text-blue-300 text-[10px] sm:text-xs">Growth</span>
+                <span className="text-[10px] sm:text-xs">Current</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="py-6 sm:py-8 lg:py-12 bg-white px-3 sm:px-4 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-4 sm:mb-6 lg:mb-8">
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 mb-2 sm:mb-3">
+              Complete Digital Marketing Services
+            </h2>
+            <p className="text-xs sm:text-sm md:text-base text-gray-600 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-2xl mx-auto">
+              From SEO to social media, we offer comprehensive solutions to grow your business online.
+            </p>
+          </div>
+
+          {/* Service Tabs - Scrollable on mobile */}
+          <div className="mb-6 sm:mb-8">
+            <div className="flex overflow-x-auto pb-3 gap-2 -mx-3 px-3 sm:flex-wrap sm:justify-center sm:overflow-visible sm:gap-3">
               {marketingServices.map((service) => (
                 <motion.button
                   key={service.id}
                   onClick={() => setActiveService(service.id)}
-                  className={`px-3 min-[320px]:px-4 sm:px-5 py-2 min-[320px]:py-2.5 rounded-lg font-semibold transition-all duration-300 text-sm min-[320px]:text-base ${
+                  className={`flex-shrink-0 px-3 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all ${
                     activeService === service.id
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'
+                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow'
                       : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
                   }`}
-                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <span className="mr-1 min-[320px]:mr-2">{service.icon}</span>
+                  <span className="mr-1 sm:mr-2">{service.icon}</span>
                   {service.name}
                 </motion.button>
               ))}
             </div>
 
             {/* Service Details */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeService}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                {currentService && (
-                  <motion.div 
-                    className="bg-gradient-to-br  mb-2 from-white to-gray-50 rounded-lg sm:rounded-xl lg:rounded-2xl p-4 min-[320px]:p-5 lg:p-8 shadow-xl border border-gray-100"
-                    whileHover={{ y: -5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 min-[320px]:gap-8">
-                      <div>
-                        <div className="flex items-center gap-4 mb-4 min-[320px]:mb-6">
-                          <div className={`w-12 h-12 min-[320px]:w-14 min-[320px]:h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-r ${currentService.color} rounded-lg sm:rounded-xl lg:rounded-2xl flex items-center justify-center text-white`}>
-                            {currentService.icon}
+            <div className="mt-4 sm:mt-6">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeService}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {currentService && (
+                    <div className="bg-gradient-to-br from-white to-gray-50 rounded-lg sm:rounded-xl p-3 sm:p-4 lg:p-6 shadow border border-gray-100">
+                      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+                        <div>
+                          <div className="flex items-center gap-3 mb-3">
+                            <div className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r ${currentService.color} rounded-lg flex items-center justify-center text-white`}>
+                              {currentService.icon}
+                            </div>
+                            <div>
+                              <h3 className="text-base sm:text-lg md:text-xl font-bold text-gray-900">{currentService.name}</h3>
+                              <p className="text-blue-600 font-semibold text-xs sm:text-sm">{currentService.budget}</p>
+                            </div>
                           </div>
-                          <div>
-                            <h3 className="text-xl min-[320px]:text-2xl sm:text-3xl font-bold text-gray-900">{currentService.name}</h3>
-                            <p className="text-blue-600 font-semibold text-sm min-[320px]:text-base">{currentService.budget}</p>
+                          <p className="text-gray-600 text-xs sm:text-sm mb-3 leading-relaxed">
+                            {currentService.description}
+                          </p>
+                          
+                          <div className="bg-blue-50 rounded-lg p-2 sm:p-3">
+                            <h4 className="font-bold text-gray-800 text-xs sm:text-sm mb-1">Ideal For:</h4>
+                            <div className="flex flex-wrap gap-1">
+                              {['Startups', 'E-commerce', 'B2B', 'Local', 'Enterprise'].map((item, index) => (
+                                <span
+                                  key={index}
+                                  className="bg-white text-blue-800 px-2 py-0.5 rounded-full text-xs font-medium border border-blue-200"
+                                >
+                                  {item}
+                                </span>
+                              ))}
+                            </div>
                           </div>
                         </div>
-                        <p className="text-gray-600 text-sm min-[320px]:text-base lg:text-lg mb-4 min-[320px]:mb-6 leading-relaxed">
-                          {currentService.description}
-                        </p>
-                        
-                        <div className="bg-blue-50 rounded-lg sm:rounded-xl p-3 min-[320px]:p-4">
-                          <h4 className="font-bold text-gray-800 mb-2 min-[320px]:mb-3 text-sm min-[320px]:text-base">Ideal For:</h4>
-                          <div className="flex flex-wrap gap-1 min-[320px]:gap-2">
-                            {['Startups', 'E-commerce', 'B2B Companies', 'Local Businesses', 'Enterprise'].map((item, index) => (
-                              <motion.span
+
+                        <div>
+                          <h4 className="font-bold text-gray-800 text-sm mb-2">Service Includes:</h4>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-2">
+                            {currentService.features.map((feature, index) => (
+                              <div 
                                 key={index}
-                                className="bg-white text-blue-800 px-2 min-[320px]:px-3 py-1 rounded-full text-xs min-[320px]:text-sm font-medium border border-blue-200"
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                transition={{ delay: index * 0.1 }}
-                                whileHover={{ scale: 1.1 }}
+                                className="flex items-center text-gray-600 bg-white rounded p-1.5 sm:p-2 shadow-sm border border-gray-100"
                               >
-                                {item}
-                              </motion.span>
+                                <span className="text-green-500 mr-2 text-sm">✓</span>
+                                <span className="text-xs sm:text-sm">{feature}</span>
+                              </div>
                             ))}
                           </div>
                         </div>
                       </div>
-
-                      <div>
-                        <h4 className="font-bold text-gray-800 mb-3 min-[320px]:mb-4 text-lg min-[320px]:text-xl">Service Includes:</h4>
-                        <div className="grid grid-cols-1 min-[320px]:grid-cols-2 gap-2 min-[320px]:gap-3">
-                          {currentService.features.map((feature, index) => (
-                            <motion.div 
-                              key={index}
-                              className="flex items-center text-gray-600 bg-white rounded-lg p-2 min-[320px]:p-3 shadow-sm border border-gray-100"
-                              initial={{ opacity: 0, x: 20 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: index * 0.1 }}
-                              whileHover={{ x: 5 }}
-                            >
-                              <motion.span 
-                                className="text-green-500 mr-2 min-[320px]:mr-3 text-lg"
-                                whileHover={{ scale: 1.2 }}
-                              >
-                                ✓
-                              </motion.span>
-                              <span className="text-xs min-[320px]:text-sm">{feature}</span>
-                            </motion.div>
-                          ))}
-                        </div>
-                      </div>
                     </div>
-                  </motion.div>
-                )}
-              </motion.div>
-            </AnimatePresence>
+                  )}
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Features Section - Mobile Optimized */}
-      <section className="py-8 min-[320px]:py-10  mt-9 sm:py-12 lg:py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-3 min-[320px]:px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-6 min-[320px]:mb-8 lg:mb-16"
-          >
-            <h2 className="text-xl min-[320px]:text-2xl min-[375px]:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 min-[320px]:mb-4 leading-tight">
+      {/* Features Section */}
+      <section className="py-6 sm:py-8 lg:py-12 bg-gray-50 px-3 sm:px-4 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-4 sm:mb-6 lg:mb-8">
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">
               Why Choose Our Digital Marketing?
             </h2>
-            <p className="text-sm min-[320px]:text-base sm:text-lg lg:text-xl text-gray-600 max-w-xs min-[320px]:max-w-sm sm:max-w-md lg:max-w-3xl mx-auto px-2 min-[320px]:px-4">
+            <p className="text-xs sm:text-sm md:text-base text-gray-600 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-2xl mx-auto">
               We combine cutting-edge technology with proven strategies to deliver exceptional results.
             </p>
-          </motion.div>
+          </div>
 
-          <div className="grid grid-cols-1 min-[320px]:grid-cols-2 lg:grid-cols-4 gap-4 min-[320px]:gap-5 sm:gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
             {marketingFeatures.map((feature, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -5, scale: 1.02 }}
-                className="bg-white rounded-lg sm:rounded-xl lg:rounded-2xl p-4 min-[320px]:p-5 lg:p-8 shadow-md hover:shadow-xl transition-all duration-500 border border-gray-100 text-center"
+                className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 lg:p-6 shadow border border-gray-100 text-center"
               >
-                <div className={`w-12 h-12 min-[320px]:w-14 min-[320px]:h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-r ${feature.color} rounded-lg sm:rounded-xl lg:rounded-2xl flex items-center justify-center text-white mb-3 min-[320px]:mb-4 lg:mb-6 mx-auto`}>
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r ${feature.color} rounded-lg flex items-center justify-center text-white mb-2 sm:mb-3 mx-auto`}>
                   {feature.icon}
                 </div>
-                <h3 className="text-base min-[320px]:text-lg sm:text-xl font-bold text-gray-900 mb-2 min-[320px]:mb-3 lg:mb-4 leading-tight">
+                <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 mb-1 sm:mb-2">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed text-xs min-[320px]:text-sm sm:text-base">
+                <p className="text-gray-600 leading-relaxed text-xs sm:text-sm">
                   {feature.description}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Stats Section - Mobile Optimized */}
-      <section className="py-8 min-[320px]:py-10 sm:py-12 lg:py-20 bg-gradient-to-r from-blue-900 to-purple-900 text-white">
-        <div className="max-w-7xl mx-auto px-3 min-[320px]:px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            className="grid grid-cols-2 min-[320px]:grid-cols-2 lg:grid-cols-4 gap-4 min-[320px]:gap-5 sm:gap-6 lg:gap-8"
-          >
+      {/* Stats Section */}
+      <section className="py-6 sm:py-8 lg:py-12 bg-gradient-to-r from-blue-900 to-purple-900 text-white px-3 sm:px-4 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
             {marketingStats.map((stat, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                className="text-center p-3 min-[320px]:p-4 lg:p-6"
+                className="text-center p-2 sm:p-3 lg:p-4"
               >
-                <div className="w-10 h-10 min-[320px]:w-12 min-[320px]:h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-blue-500 rounded-lg sm:rounded-xl lg:rounded-2xl flex items-center justify-center text-white mb-2 min-[320px]:mb-3 lg:mb-4 mx-auto">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-blue-500 rounded-lg flex items-center justify-center text-white mb-1 sm:mb-2 mx-auto">
                   {stat.icon}
                 </div>
-                <motion.div 
-                  className="text-xl min-[320px]:text-2xl sm:text-3xl lg:text-4xl font-bold mb-1 min-[320px]:mb-2 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
-                >
-                  {stat.number}
-                </motion.div>
-                <div className="text-gray-300 font-medium text-xs min-[320px]:text-sm leading-tight">{stat.label}</div>
-              </motion.div>
+                <div className="text-base sm:text-lg lg:text-xl font-bold mb-0.5 sm:mb-1">{stat.number}</div>
+                <div className="text-gray-300 text-[10px] sm:text-xs leading-tight">{stat.label}</div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      
-
       {/* Case Studies */}
-      <section className="py-8 min-[320px]:py-10 sm:py-12 lg:py-20 bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-3 min-[320px]:px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-6 min-[320px]:mb-8 lg:mb-16"
-          >
-            <h2 className="text-xl min-[320px]:text-2xl min-[375px]:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 min-[320px]:mb-4 leading-tight">
+      <section className="py-6 sm:py-8 lg:py-12 bg-gray-900 text-white px-3 sm:px-4 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-4 sm:mb-6 lg:mb-8">
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-2 sm:mb-3">
               Digital Marketing Success Stories
             </h2>
-            <p className="text-sm min-[320px]:text-base sm:text-lg lg:text-xl text-gray-300 max-w-xs min-[320px]:max-w-sm sm:max-w-md lg:max-w-3xl mx-auto px-2 min-[320px]:px-4">
+            <p className="text-xs sm:text-sm md:text-base text-gray-300 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-2xl mx-auto">
               Real results from our comprehensive digital marketing campaigns.
             </p>
-          </motion.div>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 min-[320px]:gap-5 sm:gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
             {caseStudies.map((study, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                whileHover={{ y: -5, scale: 1.02 }}
-                className="bg-gray-800 rounded-lg sm:rounded-xl lg:rounded-2xl p-4 min-[320px]:p-5 lg:p-8 hover:bg-gray-750 transition-all duration-500"
+                className="bg-gray-800 rounded-lg sm:rounded-xl p-3 sm:p-4 lg:p-6"
               >
-                <div className="flex justify-between items-start mb-3 min-[320px]:mb-4">
+                <div className="flex justify-between items-start mb-2 sm:mb-3">
                   <div>
-                    <h3 className="text-lg min-[320px]:text-xl font-bold mb-1">{study.client}</h3>
-                    <p className="text-blue-400 text-sm">{study.service}</p>
+                    <h3 className="text-sm sm:text-base font-bold mb-0.5">{study.client}</h3>
+                    <p className="text-blue-400 text-xs sm:text-sm">{study.service}</p>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm text-gray-400">Budget</div>
-                    <div className="text-green-400 font-semibold text-sm min-[320px]:text-base">{study.budget}</div>
+                    <div className="text-xs text-gray-400">Budget</div>
+                    <div className="text-green-400 font-semibold text-xs sm:text-sm">{study.budget}</div>
                   </div>
                 </div>
 
-                <div className="mb-3 min-[320px]:mb-4">
-                  <h4 className="font-semibold mb-1 min-[320px]:mb-2 text-gray-300 text-sm">Challenge:</h4>
-                  <p className="text-gray-400 text-xs min-[320px]:text-sm">{study.challenge}</p>
+                <div className="mb-2 sm:mb-3">
+                  <h4 className="font-semibold text-gray-300 text-xs sm:text-sm mb-0.5">Challenge:</h4>
+                  <p className="text-gray-400 text-xs">{study.challenge}</p>
                 </div>
 
-                <div className="mb-3 min-[320px]:mb-4">
-                  <h4 className="font-semibold mb-1 min-[320px]:mb-2 text-gray-300 text-sm">Solution:</h4>
-                  <p className="text-gray-400 text-xs min-[320px]:text-sm">{study.solution}</p>
+                <div className="mb-2 sm:mb-3">
+                  <h4 className="font-semibold text-gray-300 text-xs sm:text-sm mb-0.5">Solution:</h4>
+                  <p className="text-gray-400 text-xs">{study.solution}</p>
                 </div>
 
-                <div className="mb-3 min-[320px]:mb-4">
-                  <h4 className="font-semibold mb-1 min-[320px]:mb-2 text-gray-300 text-sm">Results:</h4>
-                  <ul className="space-y-1">
+                <div className="mb-2 sm:mb-3">
+                  <h4 className="font-semibold text-gray-300 text-xs sm:text-sm mb-0.5">Results:</h4>
+                  <ul className="space-y-0.5">
                     {study.results.map((result, resultIndex) => (
-                      <motion.li 
+                      <li 
                         key={resultIndex} 
-                        className="text-green-400 text-xs min-[320px]:text-sm flex items-center"
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ delay: resultIndex * 0.1 + index * 0.2 }}
+                        className="text-green-400 text-xs flex items-center"
                       >
-                        <motion.span 
-                          className="mr-2"
-                          animate={{ scale: [1, 1.2, 1] }}
-                          transition={{ duration: 2, repeat: Infinity, delay: resultIndex * 0.5 }}
-                        >
-                          📈
-                        </motion.span>
+                        <span className="mr-1">📈</span>
                         {result}
-                      </motion.li>
+                      </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="text-sm text-gray-400">
+                <div className="text-xs text-gray-400">
                   Duration: {study.duration}
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Benefits Section */}
-      <section className="py-8 min-[320px]:py-10 sm:py-12 lg:py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-3 min-[320px]:px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-6 min-[320px]:mb-8 lg:mb-16"
-          >
-            <h2 className="text-xl min-[320px]:text-2xl min-[375px]:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 min-[320px]:mb-4 leading-tight">
+      <section className="py-6 sm:py-8 lg:py-12 bg-gray-50 px-3 sm:px-4 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-4 sm:mb-6 lg:mb-8">
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">
               Transform Your Business Growth
             </h2>
-            <p className="text-sm min-[320px]:text-base sm:text-lg lg:text-xl text-gray-600 max-w-xs min-[320px]:max-w-sm sm:max-w-md lg:max-w-3xl mx-auto px-2 min-[320px]:px-4">
+            <p className="text-xs sm:text-sm md:text-base text-gray-600 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-2xl mx-auto">
               Achieve measurable results that impact your bottom line.
             </p>
-          </motion.div>
+          </div>
 
-          <div className="grid grid-cols-1 min-[320px]:grid-cols-2 lg:grid-cols-3 gap-4 min-[320px]:gap-5 sm:gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
             {benefitsData.map((benefit, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                whileHover={{ y: -3 }}
-                className="bg-white rounded-lg sm:rounded-xl lg:rounded-2xl p-4 min-[320px]:p-5 lg:p-8 shadow-md hover:shadow-xl transition-all duration-500 border border-gray-100 relative overflow-hidden"
+                className="bg-white rounded-lg sm:rounded-xl p-3 sm:p-4 lg:p-6 shadow border border-gray-100 relative overflow-hidden text-center"
               >
-                <div className={`absolute top-0 right-0 w-16 h-16 min-[320px]:w-20 min-[320px]:h-20 lg:w-24 lg:h-24 bg-gradient-to-r ${benefit.color} rounded-full -mr-8 -mt-8 min-[320px]:-mr-10 min-[320px]:-mt-10 lg:-mr-12 lg:-mt-12 opacity-10`}></div>
+                <div className={`w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r ${benefit.color} rounded-lg flex items-center justify-center text-white mb-2 sm:mb-3 mx-auto`}>
+                  <TrendingUp className="text-lg" />
+                </div>
                 
-                <motion.div
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.3 }}
-                  className={`w-12 h-12 min-[320px]:w-14 min-[320px]:h-14 sm:w-16 sm:h-16 lg:w-20 lg:h-20 bg-gradient-to-r ${benefit.color} rounded-lg sm:rounded-xl lg:rounded-2xl flex items-center justify-center text-white mb-3 min-[320px]:mb-4 lg:mb-6 mx-auto`}
-                >
-                  <TrendingUp className="text-lg min-[320px]:text-xl lg:text-2xl" />
-                </motion.div>
-                
-                <h3 className="text-base min-[320px]:text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-2 min-[320px]:mb-3 lg:mb-4 text-center leading-tight">
+                <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 mb-1 sm:mb-2">
                   {benefit.title}
                 </h3>
                 
-                <motion.div
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.4 }}
-                  className="text-xl min-[320px]:text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-2 min-[320px]:mb-3 lg:mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-                >
+                <div className="text-base sm:text-lg lg:text-xl font-bold mb-1 sm:mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   {benefit.improvement}
-                </motion.div>
+                </div>
                 
-                <p className="text-gray-600 text-center leading-relaxed text-xs min-[320px]:text-sm sm:text-base">
+                <p className="text-gray-600 text-xs sm:text-sm">
                   {benefit.description}
                 </p>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-8 min-[320px]:py-10 sm:py-12 lg:py-20 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <div className="max-w-4xl mx-auto px-3 min-[320px]:px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-xl min-[320px]:text-2xl min-[375px]:text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 min-[320px]:mb-4 lg:mb-6 leading-tight">
+      <section className="py-6 sm:py-8 lg:py-12 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 sm:px-4 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <div>
+            <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-2 sm:mb-3 lg:mb-4">
               Ready to Transform Your Digital Presence?
             </h2>
-            <p className="text-sm min-[320px]:text-base sm:text-lg lg:text-xl mb-4 min-[320px]:mb-5 lg:mb-8 text-blue-100 max-w-xs min-[320px]:max-w-sm sm:max-w-md lg:max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xs sm:text-sm md:text-base mb-3 sm:mb-4 lg:mb-5 text-blue-100 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-xl mx-auto leading-relaxed">
               Get your free marketing audit and discover how we can drive measurable growth for your business.
             </p>
-            <div className="flex flex-col min-[320px]:flex-row gap-2 min-[320px]:gap-3 sm:gap-4 justify-center px-2">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full min-[320px]:w-auto"
-              >
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
+              <div className="w-full sm:w-auto">
                 <Link 
                   to="/contact"
-                  className="inline-block bg-white text-gray-900 px-4 min-[320px]:px-5 sm:px-6 lg:px-8 py-2 min-[320px]:py-2.5 sm:py-3 lg:py-4 rounded-lg sm:rounded-xl font-semibold text-sm min-[320px]:text-base sm:text-lg hover:bg-gray-100 transition-all duration-300 shadow-lg sm:shadow-2xl w-full text-center"
+                  className="inline-block bg-white text-gray-900 px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg font-semibold text-xs sm:text-sm hover:bg-gray-100 transition-all duration-300 shadow w-full text-center"
                 >
                   Get Free Marketing Audit
                 </Link>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-full min-[320px]:w-auto"
-              >
+              </div>
+              <div className="w-full sm:w-auto">
                 <Link 
                   to="/contact"
-                  className="inline-block border border-white min-[320px]:border-2 text-white px-4 min-[320px]:px-5 sm:px-6 lg:px-8 py-2 min-[320px]:py-2.5 sm:py-3 lg:py-4 rounded-lg sm:rounded-xl font-semibold text-sm min-[320px]:text-base sm:text-lg hover:bg-white hover:text-gray-900 transition-all duration-300 w-full text-center"
+                  className="inline-block border border-white text-white px-4 py-2 sm:px-5 sm:py-2.5 rounded-lg font-semibold text-xs sm:text-sm hover:bg-white hover:text-gray-900 transition-all duration-300 w-full text-center"
                 >
                   Schedule Consultation
                 </Link>
-              </motion.div>
+              </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* ROI Calculator Preview */}
-      <section className="py-8 min-[320px]:py-10 sm:py-12 lg:py-20 bg-gray-900 text-white">
-        <div className="max-w-4xl mx-auto px-3 min-[320px]:px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h3 className="text-lg min-[320px]:text-xl sm:text-2xl lg:text-3xl font-bold mb-3 min-[320px]:mb-4">Calculate Your Marketing ROI</h3>
-            <p className="text-gray-400 mb-4 min-[320px]:mb-5 lg:mb-8 text-sm min-[320px]:text-base">See the potential impact of professional digital marketing</p>
+      <section className="py-6 sm:py-8 lg:py-12 bg-gray-900 text-white px-3 sm:px-4 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <div>
+            <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2 sm:mb-3">Calculate Your Marketing ROI</h3>
+            <p className="text-gray-400 mb-3 sm:mb-4 text-xs sm:text-sm">See the potential impact of professional digital marketing</p>
             
-            <div className="grid grid-cols-1 min-[320px]:grid-cols-3 gap-3 min-[320px]:gap-4 lg:gap-6 mt-4 min-[320px]:mt-5 lg:mt-8">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 lg:gap-4 mt-3 sm:mt-4">
               {[
                 { label: "Average Monthly ROI", value: "300%" },
                 { label: "Increase in Qualified Leads", value: "245%" },
                 { label: "ROI Timeline", value: "< 3 Months" }
               ].map((item, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-gray-800 rounded-lg sm:rounded-xl lg:rounded-2xl p-3 min-[320px]:p-4 lg:p-6"
+                  className="bg-gray-800 rounded-lg sm:rounded-xl p-2 sm:p-3 lg:p-4"
                 >
-                  <div className="text-lg min-[320px]:text-xl sm:text-2xl font-bold text-blue-400 mb-1 min-[320px]:mb-2">{item.value}</div>
-                  <div className="text-gray-400 text-xs min-[320px]:text-sm leading-tight">{item.label}</div>
-                </motion.div>
+                  <div className="text-base sm:text-lg font-bold text-blue-400 mb-0.5 sm:mb-1">{item.value}</div>
+                  <div className="text-gray-400 text-[10px] sm:text-xs leading-tight">{item.label}</div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>
   );
 };
 
-export default Home ;
+export default Home;
