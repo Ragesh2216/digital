@@ -4,17 +4,13 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="./src/assets/Favicon/favicon.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>digital services</title>
+    <title>digital service </title>
 
-    <!-- GitHub Pages HashRouter Fix -->
+    <!-- Universal redirect for HashRouter -->
     <script>
       (function () {
         if (!window.location.hash) {
-          window.location.replace(
-            window.location.origin +
-              window.location.pathname +
-              "#/"
-          );
+          window.location.replace(window.location.pathname + "#/");
         }
       })();
     </script>
@@ -22,16 +18,20 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
       crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
   </head>
-
   <body>
     <div id="root"></div>
+
+    <!-- IMPORTANT: DO NOT TOUCH THIS. LET VITE REPLACE IT DURING BUILD -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -1,13 +1,12 @@
 {
-  "name": "your-project",
+  "name": "digital",
   "version": "1.0.0",
-  "homepage": "https://Ragesh2216.github.io/digital/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-     "predeploy": "npm run build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
   "type": "module",
@@ -19,7 +18,7 @@
     "axios": "^1.13.2",
     "barcode": "^0.1.0",
     "caniuse-lite": "^1.0.30001754",
-    "framer-motion": "^12.23.24",
+    "framer-motion": "^12.23.26",
     "lucide-react": "^0.553.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

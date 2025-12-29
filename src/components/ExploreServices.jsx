@@ -1,13 +1,82 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, useAnimation, AnimatePresence ,useInView } from 'framer-motion';
+import { 
+  TrendingUp,
+  Bolt,
+  RocketLaunch,
+  Analytics,
+  AutoGraph,
+  Speed,
+  Security,
+  Smartphone,
+  Language,
+  Campaign,
+  People,
+  ShowChart,
+  ArrowRight,
+  ArrowDownward,
+  Star,
+  CheckCircle,
+  Timeline,
+  Devices,
+  LocalFireDepartment,
+  TrendingFlat
+} from '@mui/icons-material';
 
+// Fix: Add function keyword or use arrow function
 const ExploreServices = () => {
-  const [activePlatform, setActivePlatform] = useState('google');
+  const [activeTrend, setActiveTrend] = useState('ai');
+  const [scrollY, setScrollY] = useState(0);
+  const heroRef = useRef(null);
+  const statsRef = useRef(null);
+  const trendsRef = useRef(null);
+  const ctaRef = useRef(null);
+  
+  const heroControls = useAnimation();
+  const statsControls = useAnimation();
+  const trendsControls = useAnimation();
+  const ctaControls = useAnimation();
+  
+  const heroInView = useInView(heroRef, { once: true });
+  const statsInView = useInView(statsRef, { once: true });
+  const trendsInView = useInView(trendsRef, { once: true });
+  const ctaInView = useInView(ctaRef, { once: true });
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (heroInView) {
+      heroControls.start('visible');
+    }
+  }, [heroControls, heroInView]);
+
+  useEffect(() => {
+    if (statsInView) {
+      statsControls.start('visible');
+    }
+  }, [statsControls, statsInView]);
+
+  useEffect(() => {
+    if (trendsInView) {
+      trendsControls.start('visible');
+    }
+  }, [trendsControls, trendsInView]);
+
+  useEffect(() => {
+    if (ctaInView) {
+      ctaControls.start('visible');
+    }
+  }, [ctaControls, ctaInView]);
 
   // Animation variants
   const containerVariants = {
@@ -15,14 +84,14 @@ const ExploreServices = () => {
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.6,
-        staggerChildren: 0.1
+        staggerChildren: 0.1,
+        duration: 0.6
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
@@ -33,379 +102,630 @@ const ExploreServices = () => {
     }
   };
 
-  const platforms = [
+  const cardVariants = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100
+      }
+    },
+    hover: {
+      y: -5,
+      boxShadow: "0 20px 40px rgba(0,0,0,0.1)",
+      transition: {
+        duration: 0.2
+      }
+    }
+  };
+
+  // Trending Digital Services
+  const trendingServices = [
     {
-      id: 'google',
-      name: 'Google Ads',
-      icon: '🔍',
-      description: 'Reach customers actively searching for your products or services',
-      budget: 'From $500/month'
+      id: 'ai',
+      name: 'AI-Powered Marketing',
+      icon: <AutoGraph />,
+      description: 'Leverage artificial intelligence for predictive analytics and automated optimization',
+      features: [
+        'Predictive Customer Insights',
+        'Automated Ad Optimization',
+        'AI Content Generation',
+        'Real-time Performance Analysis'
+      ],
+      budget: 'From $1,999/month',
+      color: 'from-purple-500 to-pink-500',
+      growth: '350%',
+      demand: 'High'
     },
     {
-      id: 'facebook',
-      name: 'Meta Ads',
-      icon: '👥',
-      description: 'Target specific demographics across Facebook and Instagram',
-      budget: 'From $300/month'
+      id: 'voice',
+      name: 'Voice Search Optimization',
+      icon: <Language />,
+      description: 'Optimize for voice-activated devices and natural language queries',
+      features: [
+        'Voice SEO Strategy',
+        'Conversational Content',
+        'Local Voice Optimization',
+        'Smart Speaker Integration'
+      ],
+      budget: 'From $1,299/month',
+      color: 'from-blue-500 to-cyan-500',
+      growth: '280%',
+      demand: 'Growing'
     },
     {
-      id: 'linkedin',
-      name: 'LinkedIn Ads',
-      icon: '💼',
-      description: 'Reach professionals and decision-makers',
-      budget: 'From $1,000/month'
+      id: 'metaverse',
+      name: 'Metaverse Marketing',
+      icon: <Devices />,
+      description: 'Establish presence in virtual worlds and immersive digital experiences',
+      features: [
+        'Virtual Storefronts',
+        'NFT Integration',
+        'AR/VR Campaigns',
+        'Digital Community Building'
+      ],
+      budget: 'From $2,499/month',
+      color: 'from-green-500 to-emerald-500',
+      growth: '420%',
+      demand: 'Emerging'
     },
     {
-      id: 'amazon',
-      name: 'Amazon Ads',
-      icon: '🛒',
-      description: 'Capture high-intent shoppers on Amazon',
-      budget: 'From $750/month'
+      id: 'video',
+      name: 'Short-Form Video',
+      icon: <Smartphone />,
+      description: 'Capture attention with engaging short-form video content across platforms',
+      features: [
+        'TikTok Strategy',
+        'Reels & Shorts Production',
+        'Video SEO',
+        'Interactive Content'
+      ],
+      budget: 'From $1,599/month',
+      color: 'from-orange-500 to-red-500',
+      growth: '310%',
+      demand: 'High'
     }
   ];
 
-  const benefits = [
+  // Digital Transformation Stats
+  const transformationStats = [
+    { 
+      icon: <TrendingUp />, 
+      value: '89%', 
+      label: 'Digital Adoption',
+      description: 'Businesses accelerating digital transformation'
+    },
+    { 
+      icon: <Bolt />, 
+      value: '3.2x', 
+      label: 'Growth Rate',
+      description: 'Digital-first companies grow faster'
+    },
+    { 
+      icon: <People />, 
+      value: '72%', 
+      label: 'Market Reach',
+      description: 'Increase in potential audience'
+    },
+    { 
+      icon: <Analytics />, 
+      value: '45%', 
+      label: 'Cost Reduction',
+      description: 'Through automation & optimization'
+    }
+  ];
+
+  // Key Benefits
+  const keyBenefits = [
     {
-      icon: '⚡',
-      title: 'Immediate Results',
-      description: 'Start driving traffic within hours'
+      icon: <RocketLaunch />,
+      title: 'Rapid Implementation',
+      description: 'Get your digital strategy live in weeks, not months',
+      color: 'from-purple-500 to-pink-500'
     },
     {
-      icon: '🎯',
-      title: 'Precise Targeting',
-      description: 'Reach your ideal customers'
+      icon: <Security />,
+      title: 'Enterprise Security',
+      description: 'Bank-level security for all digital assets and data',
+      color: 'from-blue-500 to-cyan-500'
     },
     {
-      icon: '📊',
-      title: 'Measurable ROI',
-      description: 'Track every dollar spent'
+      icon: <Speed />,
+      title: 'Performance Focused',
+      description: 'Lightning-fast solutions for optimal user experience',
+      color: 'from-green-500 to-emerald-500'
     },
     {
-      icon: '🔄',
+      icon: <ShowChart />,
       title: 'Scalable Growth',
-      description: 'Scale successful campaigns'
+      description: 'Solutions that grow with your business',
+      color: 'from-orange-500 to-red-500'
     }
   ];
 
-  const metrics = [
-    { icon: '📱', value: '2.3x', label: 'Higher Conversion' },
-    { icon: '💰', value: '48%', label: 'Lower Cost' },
-    { icon: '🎯', value: '5.2x', label: 'ROI' },
-    { icon: '🚀', value: '24/7', label: 'Management' }
+  // Process Steps
+  const processSteps = [
+    {
+      step: '01',
+      title: 'Discovery & Audit',
+      description: 'Comprehensive analysis of your digital presence',
+      icon: <Analytics />
+    },
+    {
+      step: '02',
+      title: 'Strategy Development',
+      description: 'Custom roadmap for digital transformation',
+      icon: <Campaign />
+    },
+    {
+      step: '03',
+      title: 'Implementation',
+      description: 'Multi-channel deployment and integration',
+      icon: <RocketLaunch />
+    },
+    {
+      step: '04',
+      title: 'Optimization',
+      description: 'Continuous improvement and scaling',
+      icon: <AutoGraph />
+    }
   ];
 
-  const currentPlatform = platforms.find(p => p.id === activePlatform);
+  const currentTrend = trendingServices.find(t => t.id === activeTrend);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-blue-900 relative overflow-hidden w-full">
-      {/* Animated Background Elements */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        {/* Floating Gradient Orbs */}
-        {[...Array(6)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full animate-float-slow opacity-20"
-            style={{
-              width: `${Math.random() * 60 + 30}px`,
-              height: `${Math.random() * 60 + 30}px`,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              background: `linear-gradient(45deg, ${
-                ['#8B5CF6', '#EC4899', '#3B82F6', '#06B6D4', '#F59E0B', '#10B981'][i % 6]
-              }, ${
-                ['#A78BFA', '#F472B6', '#60A5FA', '#22D3EE', '#FBBF24', '#34D399'][(i + 3) % 6]
-              })`,
-              animationDelay: `${i * 2}s`,
-              animationDuration: `${15 + i * 3}s`,
-              filter: 'blur(15px)'
-            }}
-          />
-        ))}
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 overflow-hidden">
+      {/* Scroll Progress Indicator */}
+      <motion.div 
+        className="fixed top-0 left-0 h-1 bg-gradient-to-r from-blue-500 to-purple-500 z-50"
+        initial={{ width: 0 }}
+        animate={{ width: `${(scrollY / (document.body?.scrollHeight || 1000)) * 100}%` }}
+        transition={{ type: "spring", stiffness: 100 }}
+      />
 
-      {/* Header */}
-      <div className="relative z-10">
-  <div className="bg-black/20 backdrop-blur-lg border-b border-white/10">
-    <div className="max-w-7xl mt-16 mx-auto px-4 py-6">
-      <div className="flex flex-col items-center justify-center text-center">
-        <div>
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-300 to-pink-400 bg-clip-text text-transparent mb-3">
-            PPC Services
-          </h1>
-          <p className="text-purple-200 text-lg md:text-xl">Professional Advertising Management</p>
+      {/* Hero Section - Optimized for 320px */}
+      <section 
+        ref={heroRef}
+        className="relative min-h-[100vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900 pt-16"
+      >
+        {/* Animated Background */}
+        <div className="absolute inset-0">
+          {[...Array(15)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full opacity-10"
+              style={{
+                width: `${Math.random() * 80 + 20}px`,
+                height: `${Math.random() * 80 + 20}px`,
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                background: `radial-gradient(circle, ${
+                  ['#8B5CF6', '#EC4899', '#3B82F6'][i % 3]
+                } 0%, transparent 70%)`,
+              }}
+              animate={{
+                y: [0, -20, 0],
+                x: [0, Math.random() * 40 - 20, 0],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: Math.random() * 4 + 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: Math.random() * 2
+              }}
+            />
+          ))}
         </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-      {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 py-4 pb-20">
-        {/* Hero Stats */}
-        <motion.div 
-          className="grid grid-cols-2 gap-3 mb-6"
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-        >
-          {metrics.map((metric, index) => (
-            <motion.div 
-              key={index}
-              className="relative overflow-hidden rounded-xl p-3 border border-white/20 backdrop-blur-sm animate-fade-in-up group"
-              variants={itemVariants}
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 opacity-80 group-hover:opacity-100 transition-all duration-500"></div>
-              <div className="relative z-10 text-center">
-                <div className="text-2xl mb-1">{metric.icon}</div>
-                <div className="text-lg font-bold text-white mb-1">{metric.value}</div>
-                <div className="text-white/70 text-xs">{metric.label}</div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Platform Tabs */}
-        <motion.div 
-          className="flex flex-wrap justify-center gap-2 mb-6"
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-        >
-          {platforms.map((platform, index) => (
-            <motion.button
-              key={platform.id}
-              onClick={() => setActivePlatform(platform.id)}
-              className={`px-4 py-2 rounded-lg font-semibold transition-all duration-300 flex items-center gap-2 text-sm ${
-                activePlatform === platform.id
-                  ? 'bg-purple-600 text-white shadow-lg'
-                  : 'bg-black/20 text-white/80 hover:bg-white/10 border border-white/10'
-              }`}
-              variants={itemVariants}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="text-base">{platform.icon}</span>
-              {platform.name}
-            </motion.button>
-          ))}
-        </motion.div>
-
-        {/* Platform Details */}
-        <AnimatePresence mode="wait">
+        <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 w-full">
           <motion.div
-            key={activePlatform}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="mb-6"
+            variants={containerVariants}
+            initial="hidden"
+            animate={heroControls}
+            className="text-center"
           >
-            {currentPlatform && (
-              <motion.div 
-                className="bg-black/20 backdrop-blur-lg rounded-xl p-4 border border-white/20 animate-fade-in-up"
-                whileHover={{ y: -2 }}
+            <motion.div variants={itemVariants} className="mb-4">
+              <span className="inline-flex items-center px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-medium mb-4">
+                <LocalFireDepartment className="mr-1 text-sm" />
+                Trending Now
+              </span>
+            </motion.div>
+
+            <motion.h1 
+              variants={itemVariants}
+              className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 px-2 leading-tight"
+            >
+              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Digital Transformation
+              </span>
+              <br />
+              <span className="text-white">For The Modern Era</span>
+            </motion.h1>
+
+            <motion.p 
+              variants={itemVariants}
+              className="text-sm xs:text-base sm:text-lg text-gray-300 max-w-xs xs:max-w-sm sm:max-w-md md:max-w-2xl mx-auto mb-6 px-2 leading-relaxed"
+            >
+              Cutting-edge digital services powered by AI, automation, and data-driven insights to propel your business forward
+            </motion.p>
+
+            <motion.div 
+              variants={itemVariants}
+              className="flex flex-col sm:flex-row gap-3 justify-center px-2 mb-8"
+            >
+              <Link to="/contact">
+                <motion.button
+                  className="w-full sm:w-auto bg-gradient-to-r from-blue-500 to-purple-500 text-white px-5 py-3 rounded-lg font-semibold text-sm hover:from-blue-600 hover:to-purple-600 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Start Digital Journey
+                </motion.button>
+              </Link>
+              <Link to="/404">
+                <motion.button
+                  className="w-full sm:w-auto bg-white/10 backdrop-blur-sm border border-white/20 text-white px-5 py-3 rounded-lg font-semibold text-sm hover:bg-white/20 transition-all duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  View Case Studies
+                </motion.button>
+              </Link>
+            </motion.div>
+
+            {/* Animated Stats Preview */}
+            <motion.div 
+              variants={itemVariants}
+              className="grid grid-cols-2 gap-3 max-w-sm mx-auto px-2"
+            >
+              {[
+                { value: '300%', label: 'ROI' },
+                { value: '24/7', label: 'Support' },
+                { value: '99.9%', label: 'Uptime' },
+                { value: '<30', label: 'Days Setup' }
+              ].map((stat, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-white/5 backdrop-blur-sm rounded-lg p-3 border border-white/10"
+                  whileHover={{ y: -2 }}
+                >
+                  <div className="text-lg font-bold text-white">{stat.value}</div>
+                  <div className="text-xs text-gray-400">{stat.label}</div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          {/* Scroll Indicator */}
+          <motion.div
+            className="absolute bottom-6 left-1/2 transform -translate-x-1/2"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <ArrowDownward className="text-white/50 text-xl" />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section ref={statsRef} className="py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={statsControls}
+            className="text-center mb-8"
+          >
+            <motion.h2 variants={itemVariants} className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+              Digital Transformation Impact
+            </motion.h2>
+            <motion.p variants={itemVariants} className="text-sm sm:text-base text-gray-600 max-w-sm sm:max-w-md md:max-w-2xl mx-auto">
+              Real results from businesses embracing digital innovation
+            </motion.p>
+          </motion.div>
+
+          <motion.div 
+            className="grid grid-cols-2 sm:grid-cols-4 gap-4"
+            variants={containerVariants}
+            initial="hidden"
+            animate={statsControls}
+          >
+            {transformationStats.map((stat, index) => (
+              <motion.div
+                key={index}
+                variants={cardVariants}
+                whileHover="hover"
+                className="bg-gradient-to-br from-gray-50 to-white rounded-xl p-4 border border-gray-200 text-center"
               >
-                <div className="text-center">
-                  <div className="flex items-center justify-center gap-3 mb-4">
-                    <motion.div 
-                      className="text-3xl"
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.6 }}
-                    >
-                      {currentPlatform.icon}
-                    </motion.div>
-                    <div>
-                      <h3 className="text-lg font-bold text-white">{currentPlatform.name}</h3>
-                      <p className="text-purple-300 font-semibold text-sm">{currentPlatform.budget}</p>
+                <div className={`w-12 h-12 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white mb-3 mx-auto`}>
+                  {stat.icon}
+                </div>
+                <div className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
+                <div className="text-sm font-semibold text-gray-700 mb-1">{stat.label}</div>
+                <div className="text-xs text-gray-500">{stat.description}</div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Trending Services Section */}
+      <section ref={trendsRef} className="py-12 bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={trendsControls}
+            className="text-center mb-8"
+          >
+            <motion.div variants={itemVariants} className="mb-3">
+              <span className="inline-flex items-center px-3 py-1 rounded-full bg-purple-100 text-purple-700 text-xs font-medium">
+                <TrendingUp className="mr-1 text-sm" />
+                Trending Digital Services 2024
+              </span>
+            </motion.div>
+            <motion.h2 variants={itemVariants} className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+              What's Hot in Digital
+            </motion.h2>
+            <motion.p variants={itemVariants} className="text-sm sm:text-base text-gray-600 max-w-sm sm:max-w-md md:max-w-2xl mx-auto">
+              Stay ahead with the latest digital marketing innovations
+            </motion.p>
+          </motion.div>
+
+          {/* Service Tabs */}
+          <motion.div 
+            className="flex flex-wrap justify-center gap-2 mb-6"
+            variants={containerVariants}
+            initial="hidden"
+            animate={trendsControls}
+          >
+            {trendingServices.map((service, index) => (
+              <motion.button
+                key={service.id}
+                onClick={() => setActiveTrend(service.id)}
+                variants={itemVariants}
+                className={`px-3 py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all duration-300 flex items-center gap-2 ${
+                  activeTrend === service.id
+                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 text-white shadow-lg'
+                    : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
+                }`}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {service.icon}
+                {service.name}
+              </motion.button>
+            ))}
+          </motion.div>
+
+          {/* Service Details */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTrend}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="mb-8"
+            >
+              {currentTrend && (
+                <motion.div 
+                  className="bg-white rounded-xl p-5 border border-gray-200 shadow-lg"
+                  whileHover={{ y: -2 }}
+                >
+                  <div className="flex flex-col md:flex-row md:items-start gap-5">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${currentTrend.color} flex items-center justify-center text-white`}>
+                          {currentTrend.icon}
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-bold text-gray-900">{currentTrend.name}</h3>
+                          <div className="flex items-center gap-2">
+                            <span className="text-blue-600 font-semibold text-sm">{currentTrend.budget}</span>
+                            <span className={`text-xs px-2 py-0.5 rounded-full ${
+                              currentTrend.demand === 'High' 
+                                ? 'bg-green-100 text-green-700'
+                                : currentTrend.demand === 'Growing'
+                                ? 'bg-blue-100 text-blue-700'
+                                : 'bg-purple-100 text-purple-700'
+                            }`}>
+                              {currentTrend.growth} Growth
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                        {currentTrend.description}
+                      </p>
+                      <Link to="/404">
+                        <motion.button 
+                          className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-5 py-2 rounded-lg font-semibold text-sm hover:from-blue-600 hover:to-purple-600 transition-colors w-full sm:w-auto"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          Explore {currentTrend.name}
+                        </motion.button>
+                      </Link>
+                    </div>
+                    
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-gray-800 text-sm mb-3">Key Features:</h4>
+                      <div className="space-y-2">
+                        {currentTrend.features.map((feature, index) => (
+                          <motion.div
+                            key={index}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.1 }}
+                            className="flex items-start gap-2"
+                          >
+                            <CheckCircle className="text-green-500 text-sm mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-700 text-sm">{feature}</span>
+                          </motion.div>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                  <p className="text-white/80 text-sm mb-4 leading-relaxed">{currentPlatform.description}</p>
-                  
-                  <Link to="/contact">
-                    <motion.button 
-                      className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded-lg font-semibold text-sm hover:from-purple-600 hover:to-pink-600 transition-colors w-full max-w-[200px]"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      Start with {currentPlatform.name}
-                    </motion.button>
-                  </Link>
-                </div>
-              </motion.div>
-            )}
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Benefits Grid */}
-        <motion.div 
-          className="grid grid-cols-2 gap-3 mb-6"
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-        >
-          {benefits.map((benefit, index) => (
-            <motion.div
-              key={index}
-              className="bg-black/20 backdrop-blur-lg rounded-xl p-3 border border-white/20 animate-fade-in-up group"
-              variants={itemVariants}
-              style={{ animationDelay: `${index * 100 + 400}ms` }}
-              whileHover={{ y: -2 }}
-            >
-              <div className="text-center">
-                <motion.div 
-                  className="text-2xl mb-2"
-                  whileHover={{ scale: 1.2, rotate: 360 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  {benefit.icon}
                 </motion.div>
-                <h3 className="text-white font-semibold text-sm mb-1">{benefit.title}</h3>
-                <p className="text-white/70 text-xs">{benefit.description}</p>
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-8"
+          >
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+              Why Choose Digital Transformation
+            </h2>
+            <p className="text-sm sm:text-base text-gray-600 max-w-sm sm:max-w-md md:max-w-2xl mx-auto">
+              Comprehensive solutions for modern business challenges
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {keyBenefits.map((benefit, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="bg-gradient-to-br from-white to-gray-50 rounded-xl p-5 border border-gray-200 text-center"
+              >
+                <div className={`w-14 h-14 rounded-xl bg-gradient-to-r ${benefit.color} flex items-center justify-center text-white mb-4 mx-auto`}>
+                  {benefit.icon}
+                </div>
+                <h3 className="text-base font-bold text-gray-900 mb-2">{benefit.title}</h3>
+                <p className="text-sm text-gray-600 leading-relaxed">{benefit.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Process Section */}
+      <section className="py-12 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-8"
+          >
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+              Our 4-Step Process
+            </h2>
+            <p className="text-sm sm:text-base text-gray-600 max-w-sm sm:max-w-md md:max-w-2xl mx-auto">
+              A proven methodology for digital success
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {processSteps.map((step, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="relative bg-white rounded-xl p-5 border border-gray-200"
+              >
+                <div className="absolute -top-3 -left-3 w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white text-sm font-bold">
+                  {step.step}
+                </div>
+                <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 mb-4">
+                  {step.icon}
+                </div>
+                <h3 className="text-base font-bold text-gray-900 mb-2">{step.title}</h3>
+                <p className="text-sm text-gray-600">{step.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section ref={ctaRef} className="py-12 bg-gradient-to-r from-blue-600 to-purple-600">
+        <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={ctaControls}
+            className="text-center"
+          >
+            <motion.h2 
+              variants={itemVariants}
+              className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4"
+            >
+              Ready for Digital Transformation?
+            </motion.h2>
+            
+            <motion.p 
+              variants={itemVariants}
+              className="text-base sm:text-lg text-blue-100 mb-6 max-w-sm sm:max-w-md md:max-w-xl mx-auto leading-relaxed"
+            >
+              Get your free digital audit and discover how we can accelerate your business growth
+            </motion.p>
+            
+            <motion.div 
+              variants={itemVariants}
+              className="flex flex-col sm:flex-row gap-3 justify-center"
+            >
+              <Link to="/contact">
+                <motion.button 
+                  className="w-full sm:w-auto bg-white text-gray-900 px-6 py-3 rounded-lg font-bold text-sm hover:bg-gray-100 transition-all duration-300 shadow-lg"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Get Free Digital Audit
+                </motion.button>
+              </Link>
+              <Link to="/404">
+                <motion.button 
+                  className="w-full sm:w-auto bg-transparent border-2 border-white text-white px-6 py-3 rounded-lg font-bold text-sm hover:bg-white/10 transition-all duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  View Success Stories
+                </motion.button>
+              </Link>
+            </motion.div>
+
+            {/* Trust Indicators */}
+            <motion.div 
+              variants={itemVariants}
+              className="mt-8 flex flex-wrap justify-center gap-4 text-white/80"
+            >
+              <div className="flex items-center gap-2 text-sm">
+                <Star className="text-yellow-300" />
+                <span>4.9/5 Client Satisfaction</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <CheckCircle className="text-green-300" />
+                <span>100+ Projects Delivered</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <Timeline className="text-blue-300" />
+                <span>300% Average ROI</span>
               </div>
             </motion.div>
-          ))}
-        </motion.div>
-
-        {/* CTA Section */}
-        <motion.div 
-          className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-lg rounded-xl p-4 border border-white/20 text-center"
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-        >
-          <motion.h2 
-            className="text-lg font-bold text-white mb-2"
-            variants={itemVariants}
-          >
-            Ready to Drive More Leads?
-          </motion.h2>
-          <motion.p 
-            className="text-white/80 text-sm mb-4"
-            variants={itemVariants}
-          >
-            Get your free PPC audit and discover how we can help you achieve your goals.
-          </motion.p>
-          <motion.div 
-            className="flex flex-col gap-3 justify-center"
-            variants={itemVariants}
-          >
-            <Link to="/contact">
-              <motion.button 
-                className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-3 rounded-lg font-bold text-sm hover:from-purple-600 hover:to-pink-600 transition-colors shadow-lg"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                🚀 Get Free Audit
-              </motion.button>
-            </Link>
-            <Link to="/404">
-              <motion.button 
-                className="w-full border-2 border-white/30 text-white px-4 py-3 rounded-lg font-bold text-sm hover:bg-white/10 transition-colors"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                📞 Learn More
-              </motion.button>
-            </Link>
           </motion.div>
-        </motion.div>
-      </div>
-
-      {/* Enhanced CSS Animations */}
-      <style jsx global>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        
-        @keyframes floatSlow {
-          0%, 100% {
-            transform: translateY(0px) translateX(0px) rotate(0deg);
-          }
-          33% {
-            transform: translateY(-10px) translateX(5px) rotate(120deg);
-          }
-          66% {
-            transform: translateY(5px) translateX(-5px) rotate(240deg);
-          }
-        }
-        
-        @keyframes pulseSlow {
-          0%, 100% {
-            opacity: 1;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 0.6;
-            transform: scale(1.1);
-          }
-        }
-
-        @keyframes bounce {
-          0%, 100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-3px);
-          }
-        }
-
-        .animate-fade-in-up {
-          animation: fadeInUp 0.6s ease-out forwards;
-          opacity: 0;
-        }
-        
-        .animate-float-slow {
-          animation: floatSlow 20s ease-in-out infinite;
-        }
-        
-        .animate-pulse-slow {
-          animation: pulseSlow 2s ease-in-out infinite;
-        }
-
-        .animate-bounce {
-          animation: bounce 2s ease-in-out infinite;
-        }
-
-        /* Improved mobile responsiveness */
-        @media (max-width: 640px) {
-          .grid-cols-2 {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-          }
-        }
-
-        @media (max-width: 380px) {
-          .grid-cols-2 {
-            grid-template-columns: 1fr;
-          }
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-          width: 4px;
-        }
-        
-        ::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.1);
-          border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb {
-          background: rgba(139, 92, 246, 0.6);
-          border-radius: 10px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-          background: rgba(139, 92, 246, 0.8);
-        }
-      `}</style>
+        </div>
+      </section>
     </div>
   );
 };

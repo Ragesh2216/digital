@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import logo from "../images/logo.png";
+import logo from "../images/logo.webp";
 import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
@@ -36,7 +36,7 @@ const Navbar = () => {
   }, []);
 
   return (
-   <header className="bg-gradient-to-r from-[#0091e6] to-[#0091e6] fixed top-0 left-0 w-full shadow-md z-[999]">
+   <header className="bg-gray-100 fixed top-0 left-0 w-full shadow-md z-[999]">
        <nav
         ref={navRef}
         className="flex justify-between items-center px-4 sm:px-6 py-3 max-w-7xl mx-auto relative"
